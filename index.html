@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastro de Comunicados | Grupo Asserth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --green: #036847;
+  --green-dark: #02563b;
+  --green-soft: #e9f4ef;
+  --gold: #d3a642;
+  --red: #bf3c3c;
+  --text: #3f4543;
+  --muted: #747b78;
+  --border: #d8dedb;
+  --background: #f5f7f6;
+  --white: #ffffff;
+  --shadow: 0 16px 40px rgba(29, 63, 51, 0.10);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(211,166,66,.10), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(3,104,71,.08), transparent 30%),
+    var(--background);
+  color: var(--text);
+  font-family: "Montserrat", sans-serif;
+}
+
+header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 126px;
+  padding: 24px 120px;
+  background: var(--white);
+  border-top: 5px solid var(--green);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, .06);
+  text-align: center;
+}
+
+.header-copy h1 {
+  margin: 0;
+  color: var(--green);
+  font-size: clamp(26px, 3vw, 38px);
+  line-height: 1.15;
+}
+
+.header-copy p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+header img {
+  position: absolute;
+  right: 34px;
+  top: 50%;
+  width: auto;
+  height: 54px;
+  transform: translateY(-50%);
+  object-fit: contain;
+}
+
+main {
+  width: min(900px, calc(100% - 32px));
+  margin: 30px auto;
+}
+
+.card {
+  padding: 28px;
+  background: var(--white);
+  border: 1px solid rgba(3, 104, 71, .08);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 7px;
+  color: #202523;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--white);
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+
+input,
+select {
+  height: 44px;
+  padding: 0 13px;
+}
+
+textarea {
+  min-height: 112px;
+  padding: 12px 13px;
+  resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+.multi-select-trigger:focus-within {
+  outline: none;
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(3, 104, 71, .12);
+}
+
+#imageArea {
+  display: none;
+}
+
+#imagePreview {
+  display: none;
+  max-width: 230px;
+  max-height: 230px;
+  margin-top: 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* MULTISELECT */
+.multi-select {
+  position: relative;
+}
+
+.multi-select-trigger {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 46px;
+  padding: 7px 42px 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--white);
+  cursor: pointer;
+  user-select: none;
+}
+
+.multi-select-trigger::after {
+  content: "";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--green);
+  border-bottom: 2px solid var(--green);
+  transform: translateY(-68%) rotate(45deg);
+  transition: transform .18s ease;
+}
+
+.multi-select.open .multi-select-trigger::after {
+  transform: translateY(-28%) rotate(225deg);
+}
+
+.selected-values {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.placeholder {
+  color: #7b817f;
+  font-size: 14px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  max-width: 100%;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--green);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.tag-remove {
+  display: inline-grid;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,.18);
+  color: var(--white);
+  font: inherit;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.multi-select-panel {
+  position: absolute;
+  z-index: 50;
+  top: calc(100% + 7px);
+  left: 0;
+  right: 0;
+  display: none;
+  overflow: hidden;
+  max-height: 270px;
+  padding: 7px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--white);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, .14);
+}
+
+.multi-select.open .multi-select-panel {
+  display: block;
+}
+
+.option-list {
+  overflow-y: auto;
+  max-height: 254px;
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  min-height: 43px;
+  margin: 0;
+  padding: 9px 11px;
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background .16s ease, color .16s ease;
+}
+
+/* Impede o CSS geral dos inputs de deformar os checkboxes */
+.option-item input[type="checkbox"] {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  accent-color: var(--green);
+  cursor: pointer;
+}
+
+.option-item span {
+  display: block;
+  flex: 1;
+  min-width: 0;
+}
+
+.option-item:hover {
+  background: var(--green-soft);
+}
+
+.option-item:has(input:checked) {
+  background: var(--green-soft);
+  color: var(--green-dark);
+  font-weight: 600;
+}
+
+.validation-message {
+  display: none;
+  margin-top: 6px;
+  color: var(--red);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.help-text {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+button {
+  min-height: 42px;
+  padding: 0 18px;
+  border-radius: 9px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.clear-button {
+  border: 2px solid var(--green);
+  background: var(--white);
+  color: var(--green);
+}
+
+.submit-button {
+  border: 2px solid var(--green);
+  background: var(--green);
+  color: var(--white);
+}
+
+.submit-button:hover {
+  border-color: var(--green-dark);
+  background: var(--green-dark);
+}
+
+.submit-button:disabled {
+  cursor: wait;
+  opacity: .65;
+}
+
+.modal {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(26, 35, 31, .52);
+}
+
+.modal.open {
+  display: flex;
+}
+
+.modal-content {
+  width: min(390px, 100%);
+  padding: 28px;
+  border-radius: 18px;
+  background: var(--white);
+  box-shadow: 0 24px 70px rgba(0,0,0,.22);
+  text-align: center;
+}
+
+.success-icon {
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 66px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: var(--green);
+  color: var(--white);
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.modal-content h2 {
+  margin: 0 0 8px;
+  color: var(--green);
+}
+
+.modal-content p {
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (max-width: 720px) {
+  header {
+    flex-direction: column;
+    min-height: auto;
+    padding: 22px 20px;
+  }
+
+  header img {
+    position: static;
+    height: 46px;
+    margin-top: 14px;
+    transform: none;
+  }
+
+  main {
+    margin: 20px auto;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+  }
+
+  .actions button {
+    width: 100%;
+  }
+}
+
+
+/* EDITOR DE MENSAGEM */
+.message-editor {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--white);
+  overflow: visible;
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+
+.message-editor:focus-within {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(3, 104, 71, .12);
+}
+
+.editor-toolbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px;
+  border-bottom: 1px solid var(--border);
+  background: #fbfcfb;
+}
+
+.editor-button {
+  display: inline-grid;
+  place-items: center;
+  min-width: 36px;
+  min-height: 34px;
+  padding: 0 10px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: var(--green-soft);
+  color: var(--green-dark);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease;
+}
+
+.editor-button:hover,
+.editor-button:focus {
+  outline: none;
+  border-color: rgba(3,104,71,.28);
+  background: #dcefe7;
+}
+
+.editor-button.wide {
+  min-width: 72px;
+}
+
+.editor-button.preview-button {
+  margin-left: auto;
+  background: var(--white);
+  border-color: var(--green);
+}
+
+.message-editor textarea {
+  min-height: 145px;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none !important;
+}
+
+.editor-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 12px 10px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.character-counter.warning { color: var(--gold); font-weight: 700; }
+.character-counter.danger { color: var(--red); font-weight: 700; }
+
+.emoji-picker {
+  position: absolute;
+  z-index: 80;
+  top: calc(100% + 7px);
+  left: 8px;
+  display: none;
+  width: min(360px, calc(100vw - 70px));
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--white);
+  box-shadow: 0 18px 36px rgba(0,0,0,.16);
+}
+
+.emoji-picker.open { display: block; }
+
+.emoji-category {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.emoji-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.emoji-item {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  min-height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.emoji-item:hover { background: var(--green-soft); }
+
+/* MODAL DE PRÉ-VISUALIZAÇÃO */
+.preview-modal-content {
+  width: min(520px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 0;
+  border-radius: 18px;
+  background: #efeae2;
+  box-shadow: 0 24px 70px rgba(0,0,0,.28);
+}
+
+.preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  background: var(--green);
+  color: var(--white);
+}
+
+.preview-header h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.modal-close {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  min-height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,.15);
+  color: var(--white);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.whatsapp-preview {
+  min-height: 330px;
+  padding: 24px 18px;
+  background-color: #efeae2;
+  background-image:
+    radial-gradient(circle at 20px 20px, rgba(0,0,0,.025) 2px, transparent 2px),
+    radial-gradient(circle at 50px 50px, rgba(0,0,0,.02) 2px, transparent 2px);
+  background-size: 70px 70px;
+}
+
+.whatsapp-bubble {
+  position: relative;
+  width: fit-content;
+  max-width: 88%;
+  margin-left: auto;
+  padding: 9px 10px 7px;
+  border-radius: 10px 4px 10px 10px;
+  background: #d9fdd3;
+  box-shadow: 0 1px 1px rgba(0,0,0,.08);
+}
+
+.whatsapp-bubble::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -7px;
+  border-top: 0 solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 8px solid #d9fdd3;
+}
+
+.preview-image-wrap {
+  display: none;
+  overflow: hidden;
+  margin: -6px -7px 8px;
+  border-radius: 7px;
+  background: #ccd5d1;
+}
+
+.preview-image-wrap.show { display: block; }
+
+.preview-image-wrap img {
+  display: block;
+  width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+  background: #e7ece9;
+}
+
+.preview-message {
+  color: #111b21;
+  font-size: 14px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.preview-message .wa-line { min-height: 1.45em; }
+.preview-message ul { margin: 4px 0 4px 18px; padding: 0; }
+.preview-message li { margin: 2px 0; }
+.preview-message code {
+  padding: 2px 4px;
+  border-radius: 4px;
+  background: rgba(0,0,0,.08);
+  font-family: monospace;
+}
+
+.preview-meta {
+  display: flex;
+  justify-content: flex-end;
+  gap: 3px;
+  margin-top: 2px;
+  color: #667781;
+  font-size: 10px;
+}
+
+.preview-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 14px 18px 18px;
+}
+
+@media (max-width: 720px) {
+  .editor-button.preview-button {
+    margin-left: 0;
+  }
+
+  .emoji-grid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
+</style>
+</head>
+
+<body>
+<header>
+  <div class="header-copy">
+    <h1>Cadastro de Comunicados</h1>
+    <p>Comunidade Grupo Asserth</p>
+  </div>
+
+  <img
+    src="https://raw.githubusercontent.com/Silvino26/Comercial/main/asserthlogo.png"
+    alt="Grupo Asserth"
+  >
+</header>
+
+<main>
+  <section class="card">
+    <form id="communicationForm" novalidate>
+      <div class="grid">
+        <div class="full">
+          <label class="field-label" for="name">Nome da Comunicação *</label>
+          <input id="name" name="nome" type="text" required>
+        </div>
+
+        <div>
+          <label class="field-label" for="type">Tipo *</label>
+          <select id="type" name="tipo" required>
+            <option value="TEXTO">Texto</option>
+            <option value="IMAGEM">Imagem</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="field-label" for="createdBy">Criado por *</label>
+          <input id="createdBy" name="criado_por" type="text" required>
+        </div>
+
+        <div class="full">
+          <label class="field-label" id="messageLabel" for="message">Mensagem *</label>
+
+          <div class="message-editor">
+            <div class="editor-toolbar">
+              <button class="editor-button" type="button" data-format="bold" title="Negrito"><strong>B</strong></button>
+              <button class="editor-button" type="button" data-format="italic" title="Itálico"><em>I</em></button>
+              <button class="editor-button" type="button" data-format="strike" title="Tachado"><s>S</s></button>
+              <button class="editor-button wide" type="button" data-format="list" title="Lista">• Lista</button>
+              <button class="editor-button" id="emojiButton" type="button" title="Emojis">😊</button>
+              <button class="editor-button preview-button wide" id="previewButton" type="button">👁 Visualizar</button>
+
+              <div class="emoji-picker" id="emojiPicker">
+                <p class="emoji-category">Mais usados</p>
+                <div class="emoji-grid">
+                  <button class="emoji-item" type="button">✅</button><button class="emoji-item" type="button">📢</button><button class="emoji-item" type="button">📌</button><button class="emoji-item" type="button">📅</button><button class="emoji-item" type="button">📍</button><button class="emoji-item" type="button">📣</button><button class="emoji-item" type="button">🎉</button><button class="emoji-item" type="button">🎁</button>
+                  <button class="emoji-item" type="button">🚀</button><button class="emoji-item" type="button">⭐</button><button class="emoji-item" type="button">💡</button><button class="emoji-item" type="button">📲</button><button class="emoji-item" type="button">📱</button><button class="emoji-item" type="button">👋</button><button class="emoji-item" type="button">🙌</button><button class="emoji-item" type="button">👏</button>
+                  <button class="emoji-item" type="button">🤝</button><button class="emoji-item" type="button">👍</button><button class="emoji-item" type="button">😊</button><button class="emoji-item" type="button">😍</button><button class="emoji-item" type="button">❤️</button><button class="emoji-item" type="button">💚</button><button class="emoji-item" type="button">⚠️</button><button class="emoji-item" type="button">ℹ️</button>
+                </div>
+
+                <p class="emoji-category">Trabalho e comunidade</p>
+                <div class="emoji-grid">
+                  <button class="emoji-item" type="button">💼</button><button class="emoji-item" type="button">📈</button><button class="emoji-item" type="button">📊</button><button class="emoji-item" type="button">📝</button><button class="emoji-item" type="button">📎</button><button class="emoji-item" type="button">📩</button><button class="emoji-item" type="button">📬</button><button class="emoji-item" type="button">📂</button>
+                  <button class="emoji-item" type="button">👥</button><button class="emoji-item" type="button">💬</button><button class="emoji-item" type="button">🎯</button><button class="emoji-item" type="button">🏆</button><button class="emoji-item" type="button">🎊</button><button class="emoji-item" type="button">🔔</button><button class="emoji-item" type="button">📄</button><button class="emoji-item" type="button">🔗</button>
+                </div>
+              </div>
+            </div>
+
+            <textarea id="message" name="mensagem" maxlength="4096" required></textarea>
+
+            <div class="editor-footer">
+              <span id="messageHelp">Formatação compatível com o WhatsApp.</span>
+              <span class="character-counter" id="characterCounter">0 / 4096</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="full" id="imageArea">
+          <label class="field-label" for="imageUrl">URL da Imagem *</label>
+          <input
+            id="imageUrl"
+            name="url_imagem"
+            type="url"
+            placeholder="https://..."
+          >
+          <img id="imagePreview" alt="Pré-visualização da imagem">
+        </div>
+
+        <div>
+          <label class="field-label" for="dispatchDate">Data do Disparo *</label>
+          <input id="dispatchDate" name="data_disparo" type="date" required>
+        </div>
+
+        <div>
+          <label class="field-label" for="dispatchTime">Hora do Disparo *</label>
+          <input id="dispatchTime" name="hora_disparo" type="time" required>
+        </div>
+
+        <div class="full">
+          <label class="field-label">Grupo(s) de Destino *</label>
+
+          <div class="multi-select" id="groupMultiSelect">
+            <div
+              class="multi-select-trigger"
+              id="groupTrigger"
+              tabindex="0"
+              role="button"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+            >
+              <div class="selected-values" id="selectedGroups">
+                <span class="placeholder">Selecionar grupos...</span>
+              </div>
+            </div>
+
+            <div class="multi-select-panel" id="groupPanel">
+              <div class="option-list">
+                <!--
+                  Para incluir outros grupos:
+                  1. Copie um bloco <label class="option-item">...</label>.
+                  2. Altere o value para o ID real do grupo.
+                  3. Altere o texto exibido.
+                -->
+                <label class="option-item">
+                  <input
+                    type="checkbox"
+                    name="grupos_destino"
+                    value="120363429810907213-group"
+                    data-name="Grupo de Avisos"
+                  >
+                  <span>Grupo de Avisos</span>
+                </label>
+
+                <label class="option-item">
+                  <input
+                    type="checkbox"
+                    name="grupos_destino"
+                    value="grupo-comercial"
+                    data-name="Grupo Comercial"
+                  >
+                  <span>Grupo Comercial</span>
+                </label>
+
+                <label class="option-item">
+                  <input
+                    type="checkbox"
+                    name="grupos_destino"
+                    value="grupo-rh"
+                    data-name="Grupo RH"
+                  >
+                  <span>Grupo RH</span>
+                </label>
+
+                <label class="option-item">
+                  <input
+                    type="checkbox"
+                    name="grupos_destino"
+                    value="grupo-ti"
+                    data-name="Grupo TI"
+                  >
+                  <span>Grupo TI</span>
+                </label>
+
+                <label class="option-item">
+                  <input
+                    type="checkbox"
+                    name="grupos_destino"
+                    value="grupo-financeiro"
+                    data-name="Grupo Financeiro"
+                  >
+                  <span>Grupo Financeiro</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="validation-message" id="groupValidation">
+            Selecione ao menos um grupo.
+          </div>
+          <p class="help-text">
+            Você pode selecionar um ou vários grupos.
+          </p>
+        </div>
+
+        <div class="full">
+          <label class="field-label" for="notes">Observação</label>
+          <textarea id="notes" name="observacao"></textarea>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="clear-button" type="reset">Limpar</button>
+        <button class="submit-button" id="submitButton" type="submit">
+          Cadastrar Comunicação
+        </button>
+      </div>
+    </form>
+  </section>
+</main>
+
+<div class="modal" id="previewModal" role="dialog" aria-modal="true" aria-labelledby="previewTitle">
+  <div class="preview-modal-content">
+    <div class="preview-header">
+      <h2 id="previewTitle">Pré-visualização no WhatsApp</h2>
+      <button class="modal-close" id="closePreviewButton" type="button" aria-label="Fechar">×</button>
+    </div>
+
+    <div class="whatsapp-preview">
+      <div class="whatsapp-bubble">
+        <div class="preview-image-wrap" id="previewImageWrap">
+          <img id="whatsappPreviewImage" alt="Imagem do comunicado">
+        </div>
+        <div class="preview-message" id="whatsappPreviewMessage"></div>
+        <div class="preview-meta">
+          <span id="previewTime">00:00</span>
+          <span>✓✓</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="preview-footer">
+      <button class="submit-button" id="closePreviewFooterButton" type="button">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="successModal" role="dialog" aria-modal="true">
+  <div class="modal-content">
+    <div class="success-icon">✓</div>
+    <h2>Comunicado cadastrado</h2>
+    <p>
+      A comunicação foi registrada e ficará disponível para disparo na data
+      e no horário definidos.
+    </p>
+    <button class="submit-button" id="closeModalButton" type="button">
+      Fechar
+    </button>
+  </div>
+</div>
+
+<script>
+const WEBHOOK_URL = "COLE_AQUI_O_WEBHOOK_DO_N8N";
+const TEXT_LIMIT = 4096;
+const IMAGE_CAPTION_LIMIT = 1024;
+
+const form = document.getElementById("communicationForm");
+const typeField = document.getElementById("type");
+const messageLabel = document.getElementById("messageLabel");
+const messageField = document.getElementById("message");
+const messageHelp = document.getElementById("messageHelp");
+const characterCounter = document.getElementById("characterCounter");
+const emojiButton = document.getElementById("emojiButton");
+const emojiPicker = document.getElementById("emojiPicker");
+const previewButton = document.getElementById("previewButton");
+const previewModal = document.getElementById("previewModal");
+const closePreviewButton = document.getElementById("closePreviewButton");
+const closePreviewFooterButton = document.getElementById("closePreviewFooterButton");
+const previewImageWrap = document.getElementById("previewImageWrap");
+const whatsappPreviewImage = document.getElementById("whatsappPreviewImage");
+const whatsappPreviewMessage = document.getElementById("whatsappPreviewMessage");
+const previewTime = document.getElementById("previewTime");
+const imageArea = document.getElementById("imageArea");
+const imageUrl = document.getElementById("imageUrl");
+const imagePreview = document.getElementById("imagePreview");
+const dispatchDate = document.getElementById("dispatchDate");
+const dispatchTime = document.getElementById("dispatchTime");
+const groupMultiSelect = document.getElementById("groupMultiSelect");
+const groupTrigger = document.getElementById("groupTrigger");
+const selectedGroups = document.getElementById("selectedGroups");
+const groupValidation = document.getElementById("groupValidation");
+const submitButton = document.getElementById("submitButton");
+const successModal = document.getElementById("successModal");
+const closeModalButton = document.getElementById("closeModalButton");
+
+function getLocalDateString(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function getCurrentTimeString(date) {
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  return `${hours}:${minutes}`;
+}
+
+function configureDateAndTimeLimits() {
+  const now = new Date();
+  const today = getLocalDateString(now);
+  dispatchDate.min = today;
+
+  if (!dispatchDate.value) {
+    dispatchTime.min = "";
+    return;
+  }
+
+  dispatchTime.min = dispatchDate.value === today
+    ? getCurrentTimeString(now)
+    : "00:00";
+}
+
+function validateSchedule() {
+  if (!dispatchDate.value || !dispatchTime.value) return false;
+  const selectedDateTime = new Date(`${dispatchDate.value}T${dispatchTime.value}:00`);
+  return selectedDateTime.getTime() >= Date.now();
+}
+
+function getMessageLimit() {
+  return typeField.value === "IMAGEM" ? IMAGE_CAPTION_LIMIT : TEXT_LIMIT;
+}
+
+function updateCharacterCounter() {
+  const limit = getMessageLimit();
+  const length = messageField.value.length;
+  characterCounter.textContent = `${length} / ${limit}`;
+  characterCounter.classList.toggle("warning", length >= limit * 0.8 && length < limit);
+  characterCounter.classList.toggle("danger", length >= limit);
+}
+
+function updateTypeFields() {
+  const isImage = typeField.value === "IMAGEM";
+  const limit = isImage ? IMAGE_CAPTION_LIMIT : TEXT_LIMIT;
+
+  imageArea.style.display = isImage ? "block" : "none";
+  imageUrl.required = isImage;
+  messageLabel.textContent = isImage ? "Legenda *" : "Mensagem *";
+  messageHelp.textContent = isImage
+    ? "Legenda da imagem com formatação compatível com o WhatsApp."
+    : "Formatação compatível com o WhatsApp.";
+  messageField.maxLength = limit;
+
+  if (messageField.value.length > limit) {
+    messageField.value = messageField.value.slice(0, limit);
+  }
+
+  if (!isImage) {
+    imageUrl.value = "";
+    imagePreview.removeAttribute("src");
+    imagePreview.style.display = "none";
+  }
+
+  updateCharacterCounter();
+}
+
+function updateImagePreview() {
+  const value = imageUrl.value.trim();
+  if (!value) {
+    imagePreview.removeAttribute("src");
+    imagePreview.style.display = "none";
+    return;
+  }
+  imagePreview.src = value;
+  imagePreview.style.display = "block";
+}
+
+function insertAtCursor(text, selectionStartOffset = 0, selectionEndOffset = 0) {
+  const start = messageField.selectionStart;
+  const end = messageField.selectionEnd;
+  const current = messageField.value;
+  const limit = getMessageLimit();
+  const next = current.slice(0, start) + text + current.slice(end);
+
+  if (next.length > limit) return;
+
+  messageField.value = next;
+  messageField.focus();
+  messageField.setSelectionRange(
+    start + text.length + selectionStartOffset,
+    start + text.length + selectionEndOffset
+  );
+  updateCharacterCounter();
+}
+
+function wrapSelection(prefix, suffix = prefix) {
+  const start = messageField.selectionStart;
+  const end = messageField.selectionEnd;
+  const selected = messageField.value.slice(start, end);
+  const content = selected || "texto";
+  const replacement = `${prefix}${content}${suffix}`;
+  const current = messageField.value;
+  const limit = getMessageLimit();
+  const next = current.slice(0, start) + replacement + current.slice(end);
+
+  if (next.length > limit) return;
+
+  messageField.value = next;
+  messageField.focus();
+
+  if (selected) {
+    messageField.setSelectionRange(start, start + replacement.length);
+  } else {
+    messageField.setSelectionRange(start + prefix.length, start + prefix.length + content.length);
+  }
+
+  updateCharacterCounter();
+}
+
+function insertList() {
+  const start = messageField.selectionStart;
+  const end = messageField.selectionEnd;
+  const selected = messageField.value.slice(start, end);
+  const lines = (selected || "Item 1\nItem 2")
+    .split("\n")
+    .map(line => `• ${line.replace(/^[-•]\s*/, "")}`)
+    .join("\n");
+
+  const before = start > 0 && messageField.value[start - 1] !== "\n" ? "\n" : "";
+  insertAtCursor(before + lines);
+}
+
+document.querySelectorAll("[data-format]").forEach(button => {
+  button.addEventListener("click", () => {
+    const format = button.dataset.format;
+    if (format === "bold") wrapSelection("*");
+    if (format === "italic") wrapSelection("_");
+    if (format === "strike") wrapSelection("~");
+    if (format === "list") insertList();
+  });
+});
+
+emojiButton.addEventListener("click", event => {
+  event.stopPropagation();
+  emojiPicker.classList.toggle("open");
+});
+
+document.querySelectorAll(".emoji-item").forEach(button => {
+  button.addEventListener("click", event => {
+    event.stopPropagation();
+    const emoji = button.textContent;
+    const start = messageField.selectionStart;
+    const end = messageField.selectionEnd;
+    const current = messageField.value;
+    if ((current.slice(0, start) + emoji + current.slice(end)).length > getMessageLimit()) return;
+    messageField.value = current.slice(0, start) + emoji + current.slice(end);
+    messageField.focus();
+    messageField.setSelectionRange(start + emoji.length, start + emoji.length);
+    emojiPicker.classList.remove("open");
+    updateCharacterCounter();
+  });
+});
+
+document.addEventListener("click", event => {
+  if (!event.target.closest("#emojiPicker") && !event.target.closest("#emojiButton")) {
+    emojiPicker.classList.remove("open");
+  }
+});
+
+function escapeHtml(value) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function formatWhatsAppPreview(value) {
+  let html = escapeHtml(value);
+
+  html = html.replace(/```([\s\S]*?)```/g, "<code>$1</code>");
+  html = html.replace(/(^|\s)\*([^*\n]+)\*(?=\s|$|[.,!?;:])/g, "$1<strong>$2</strong>");
+  html = html.replace(/(^|\s)_([^_\n]+)_(?=\s|$|[.,!?;:])/g, "$1<em>$2</em>");
+  html = html.replace(/(^|\s)~([^~\n]+)~(?=\s|$|[.,!?;:])/g, "$1<del>$2</del>");
+
+  const lines = html.split("\n");
+  let output = "";
+  let listOpen = false;
+
+  lines.forEach(line => {
+    const listMatch = line.match(/^\s*[•-]\s+(.+)$/);
+    if (listMatch) {
+      if (!listOpen) {
+        output += "<ul>";
+        listOpen = true;
+      }
+      output += `<li>${listMatch[1]}</li>`;
+    } else {
+      if (listOpen) {
+        output += "</ul>";
+        listOpen = false;
+      }
+      output += `<div class="wa-line">${line || "&nbsp;"}</div>`;
+    }
+  });
+
+  if (listOpen) output += "</ul>";
+  return output || '<span style="color:#667781">Sua mensagem aparecerá aqui.</span>';
+}
+
+function openPreview() {
+  whatsappPreviewMessage.innerHTML = formatWhatsAppPreview(messageField.value);
+  previewTime.textContent = dispatchTime.value || getCurrentTimeString(new Date());
+
+  const isImage = typeField.value === "IMAGEM";
+  const url = imageUrl.value.trim();
+
+  if (isImage && url) {
+    whatsappPreviewImage.src = url;
+    previewImageWrap.classList.add("show");
+  } else {
+    whatsappPreviewImage.removeAttribute("src");
+    previewImageWrap.classList.remove("show");
+  }
+
+  previewModal.classList.add("open");
+}
+
+function closePreview() {
+  previewModal.classList.remove("open");
+}
+
+previewButton.addEventListener("click", openPreview);
+closePreviewButton.addEventListener("click", closePreview);
+closePreviewFooterButton.addEventListener("click", closePreview);
+previewModal.addEventListener("click", event => {
+  if (event.target === previewModal) closePreview();
+});
+
+function getCheckedGroups() {
+  return Array.from(document.querySelectorAll('input[name="grupos_destino"]:checked'));
+}
+
+function renderSelectedGroups() {
+  const checkedGroups = getCheckedGroups();
+  selectedGroups.innerHTML = "";
+
+  if (checkedGroups.length === 0) {
+    selectedGroups.innerHTML = '<span class="placeholder">Selecionar grupos...</span>';
+    return;
+  }
+
+  checkedGroups.forEach(checkbox => {
+    const tag = document.createElement("span");
+    tag.className = "tag";
+
+    const text = document.createElement("span");
+    text.textContent = checkbox.dataset.name;
+
+    const removeButton = document.createElement("button");
+    removeButton.type = "button";
+    removeButton.className = "tag-remove";
+    removeButton.setAttribute("aria-label", `Remover ${checkbox.dataset.name}`);
+    removeButton.textContent = "×";
+    removeButton.addEventListener("click", event => {
+      event.stopPropagation();
+      checkbox.checked = false;
+      renderSelectedGroups();
+    });
+
+    tag.append(text, removeButton);
+    selectedGroups.appendChild(tag);
+  });
+
+  groupValidation.style.display = "none";
+}
+
+function toggleGroupPanel(forceOpen) {
+  const shouldOpen = typeof forceOpen === "boolean"
+    ? forceOpen
+    : !groupMultiSelect.classList.contains("open");
+  groupMultiSelect.classList.toggle("open", shouldOpen);
+  groupTrigger.setAttribute("aria-expanded", String(shouldOpen));
+}
+
+groupTrigger.addEventListener("click", () => toggleGroupPanel());
+groupTrigger.addEventListener("keydown", event => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    toggleGroupPanel();
+  }
+  if (event.key === "Escape") toggleGroupPanel(false);
+});
+
+document.querySelectorAll('input[name="grupos_destino"]').forEach(checkbox => {
+  checkbox.addEventListener("change", renderSelectedGroups);
+});
+
+document.addEventListener("click", event => {
+  if (!event.target.closest("#groupMultiSelect")) toggleGroupPanel(false);
+});
+
+typeField.addEventListener("change", updateTypeFields);
+messageField.addEventListener("input", updateCharacterCounter);
+imageUrl.addEventListener("input", updateImagePreview);
+
+dispatchDate.addEventListener("change", () => {
+  configureDateAndTimeLimits();
+  if (dispatchTime.value && dispatchTime.min && dispatchTime.value < dispatchTime.min) {
+    dispatchTime.value = "";
+  }
+});
+dispatchTime.addEventListener("focus", configureDateAndTimeLimits);
+
+form.addEventListener("reset", () => {
+  setTimeout(() => {
+    document.querySelectorAll('input[name="grupos_destino"]').forEach(checkbox => {
+      checkbox.checked = false;
+    });
+    renderSelectedGroups();
+    toggleGroupPanel(false);
+    emojiPicker.classList.remove("open");
+    updateTypeFields();
+    configureDateAndTimeLimits();
+    groupValidation.style.display = "none";
+  }, 0);
+});
+
+form.addEventListener("submit", async event => {
+  event.preventDefault();
+  configureDateAndTimeLimits();
+
+  const groups = getCheckedGroups();
+  if (groups.length === 0) {
+    groupValidation.style.display = "block";
+    toggleGroupPanel(true);
+    return;
+  }
+
+  if (!validateSchedule()) {
+    alert("Informe uma data e um horário atuais ou futuros.");
+    return;
+  }
+
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
+
+  const payload = {
+    nome: document.getElementById("name").value.trim(),
+    tipo: typeField.value,
+    criado_por: document.getElementById("createdBy").value.trim(),
+    mensagem: messageField.value.trim(),
+    url_imagem: typeField.value === "IMAGEM" ? imageUrl.value.trim() : null,
+    data_disparo: dispatchDate.value,
+    hora_disparo: dispatchTime.value,
+    grupos_destino: groups.map(checkbox => ({
+      id: checkbox.value,
+      nome: checkbox.dataset.name
+    })),
+    observacao: document.getElementById("notes").value.trim()
+  };
+
+  submitButton.disabled = true;
+  submitButton.textContent = "Cadastrando...";
+
+  try {
+    if (WEBHOOK_URL !== "COLE_AQUI_O_WEBHOOK_DO_N8N") {
+      const response = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
+    }
+
+    successModal.classList.add("open");
+    form.reset();
+  } catch (error) {
+    console.error(error);
+    alert("Não foi possível cadastrar a comunicação. Verifique o webhook e tente novamente.");
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = "Cadastrar Comunicação";
+  }
+});
+
+closeModalButton.addEventListener("click", () => successModal.classList.remove("open"));
+successModal.addEventListener("click", event => {
+  if (event.target === successModal) successModal.classList.remove("open");
+});
+
+updateTypeFields();
+configureDateAndTimeLimits();
+renderSelectedGroups();
+updateCharacterCounter();
+</script>
+</body>
+</html>
