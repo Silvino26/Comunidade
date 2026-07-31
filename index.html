@@ -1340,16 +1340,6 @@ form.addEventListener("submit", async event => {
   submitButton.textContent = "Cadastrando...";
 
   try {
-    if (WEBHOOK_URL !== "https://n8n.srv1000189.hstgr.cloud/webhook/cadastro-comunicado") {
-      const response = await fetch(WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-      if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
-    }
-
-    successModal.classList.add("open");
     form.reset();
   } catch (error) {
     console.error(error);
