@@ -1339,15 +1339,37 @@ form.addEventListener("submit", async event => {
   submitButton.disabled = true;
   submitButton.textContent = "Cadastrando...";
 
-  try {
+try {
+
+    const response = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+        throw new Error(`Erro HTTP ${response.status}`);
+    }
+
+    successModal.classList.add("open");
     form.reset();
-  } catch (error) {
+
+} catch (error) {
+
     console.error(error);
-    alert("Não foi possível cadastrar a comunicação. Verifique o webhook e tente novamente.");
-  } finally {
+
+    alert(
+        "Não foi possível cadastrar a comunicação. Verifique o webhook e tente novamente."
+    );
+
+} finally {
+
     submitButton.disabled = false;
     submitButton.textContent = "Cadastrar Comunicação";
-  }
+
+}
 });
 
 closeModalButton.addEventListener("click", () => successModal.classList.remove("open"));
