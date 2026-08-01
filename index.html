@@ -391,6 +391,23 @@ button {
   font-weight: 700;
 }
 
+.error-icon {
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 66px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: #bf3c3c;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.error-title{
+  color:#bf3c3c !important;
+}
+
 .modal-content h2 {
   margin: 0 0 8px;
   color: var(--green);
@@ -922,11 +939,30 @@ button {
   <div class="modal-content">
     <div class="success-icon">✓</div>
     <h2>Comunicado cadastrado</h2>
-    <p>
-      A comunicação foi registrada e ficará disponível para disparo na data
-      e no horário definidos.
-    </p>
+<p id="successMessage">
+  A comunicação foi registrada com sucesso.
+</p>
     <button class="submit-button" id="closeModalButton" type="button">
+      Fechar
+    </button>
+  </div>
+</div>
+
+<div class="modal" id="errorModal" role="dialog" aria-modal="true">
+  <div class="modal-content">
+    <div class="error-icon">!</div>
+
+    <h2 class="error-title">Não foi possível cadastrar</h2>
+
+    <p id="errorMessage">
+      Verifique os dados e tente novamente.
+    </p>
+
+    <button
+      class="submit-button"
+      id="closeErrorModalButton"
+      type="button"
+    >
       Fechar
     </button>
   </div>
@@ -965,6 +1001,8 @@ const groupValidation = document.getElementById("groupValidation");
 const submitButton = document.getElementById("submitButton");
 const successModal = document.getElementById("successModal");
 const closeModalButton = document.getElementById("closeModalButton");
+const errorModal = document.getElementById("errorModal");
+const closeErrorModalButton = document.getElementById("closeErrorModalButton");
 
 function getLocalDateString(date) {
   const year = date.getFullYear();
@@ -1336,45 +1374,75 @@ form.addEventListener("submit", async event => {
     observacao: document.getElementById("notes").value.trim()
   };
 
-  submitButton.disabled = true;
-  submitButton.textContent = "Cadastrando...";
+submitButton.disabled = true;
+submitButton.textContent = "Cadastrando...";
 
 try {
+  const response = await fetch(WEBHOOK_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  });
 
-    const response = await fetch(WEBHOOK_URL, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-    });
+  let retorno;
 
-    if (!response.ok) {
-        throw new Error(`Erro HTTP ${response.status}`);
-    }
+  try {
+    retorno = await response.json();
+  } catch {
+    retorno = {
+      success: false,
+      mensagem: "O fluxo não retornou uma resposta válida."
+    };
+  }
 
-    successModal.classList.add("open");
-    form.reset();
+  if (!response.ok || retorno.success !== true) {
+    throw new Error(
+      retorno.mensagem ||
+      `Não foi possível cadastrar a comunicação. Erro HTTP ${response.status}.`
+    );
+  }
+
+  document.getElementById("successMessage").textContent =
+    retorno.codigo
+      ? `A comunicação foi registrada com sucesso. Código: ${retorno.codigo}`
+      : retorno.mensagem;
+
+  successModal.classList.add("open");
+
+  // Limpa somente depois da confirmação real do n8n.
+  form.reset();
 
 } catch (error) {
+  console.error("Erro ao cadastrar comunicação:", error);
 
-    console.error(error);
+  document.getElementById("errorMessage").textContent =
+    error.message ||
+    "Não foi possível cadastrar a comunicação.";
 
-    alert(
-        "Não foi possível cadastrar a comunicação. Verifique o webhook e tente novamente."
-    );
+  errorModal.classList.add("open");
 
 } finally {
-
-    submitButton.disabled = false;
-    submitButton.textContent = "Cadastrar Comunicação";
-
+  submitButton.disabled = false;
+  submitButton.textContent = "Cadastrar Comunicação";
 }
+
 });
 
 closeModalButton.addEventListener("click", () => successModal.classList.remove("open"));
 successModal.addEventListener("click", event => {
   if (event.target === successModal) successModal.classList.remove("open");
+});
+
+closeErrorModalButton.addEventListener("click", () => {
+    errorModal.classList.remove("open");
+});
+
+errorModal.addEventListener("click", event => {
+    if (event.target === errorModal) {
+        errorModal.classList.remove("open");
+    }
 });
 
 updateTypeFields();
