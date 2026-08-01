@@ -1404,10 +1404,22 @@ try {
     );
   }
 
-document.getElementById("successMessage").innerHTML = `
-A comunicação foi registrada com sucesso.<br><br>
-<strong>Código:</strong> ${retorno.codigo}
-`;
+const successMessage =
+  document.getElementById("successMessage");
+
+if (retorno.codigo) {
+
+  successMessage.innerHTML = `
+    ${retorno.mensagem}
+    <br><br>
+    <strong>Código:</strong> ${retorno.codigo}
+  `;
+
+} else {
+
+  successMessage.textContent = retorno.mensagem;
+
+}
 
   successModal.classList.add("open");
 
