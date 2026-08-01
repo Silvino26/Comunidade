@@ -937,9 +937,8 @@ button {
 
 <div class="modal" id="successModal" role="dialog" aria-modal="true">
   <div class="modal-content">
-    <div class="success-icon">✓</div>
-    <h2>Comunicado cadastrado</h2>
-<p id="successMessage">
+    <div class="success-icon" id="successIcon">✓</div>
+<h2 id="successTitle">Comunicado cadastrado</h2><p id="successMessage">
   A comunicação foi registrada com sucesso.
 </p>
     <button class="submit-button" id="closeModalButton" type="button">
@@ -1407,21 +1406,51 @@ try {
 const successMessage =
   document.getElementById("successMessage");
 
-if (retorno.codigo) {
+const successTitle =
+    document.getElementById("successTitle");
 
-  successMessage.innerHTML = `
-    ${retorno.mensagem}
-    <br><br>
-    <strong>Código:</strong> ${retorno.codigo}
-  `;
+const successIcon =
+    document.getElementById("successIcon");
+
+// Reset padrão
+successIcon.className = "success-icon";
+successIcon.textContent = "✓";
+
+if (retorno.incluidos > 0 && retorno.duplicados === 0) {
+
+    successTitle.textContent = "Comunicado cadastrado";
+
+} else if (retorno.incluidos === 0) {
+
+    successTitle.textContent = "Comunicado já agendado";
+
+    successIcon.className = "error-icon";
+    successIcon.textContent = "ℹ";
 
 } else {
 
-  successMessage.textContent = retorno.mensagem;
+    successTitle.textContent = "Cadastro parcial";
+
+    successIcon.className = "error-icon";
+    successIcon.textContent = "⚠";
 
 }
 
-  successModal.classList.add("open");
+if (retorno.codigo && retorno.incluidos > 0) {
+
+    successMessage.innerHTML = `
+        ${retorno.mensagem}
+        <br><br>
+        <strong>Código:</strong> ${retorno.codigo}
+    `;
+
+} else {
+
+    successMessage.textContent = retorno.mensagem;
+
+}
+
+successModal.classList.add("open");
 
   // Limpa somente depois da confirmação real do n8n.
   form.reset();
