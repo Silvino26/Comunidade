@@ -1404,10 +1404,10 @@ try {
     );
   }
 
-  document.getElementById("successMessage").textContent =
-    retorno.codigo
-      ? `A comunicação foi registrada com sucesso. Código: ${retorno.codigo}`
-      : retorno.mensagem;
+document.getElementById("successMessage").innerHTML = `
+A comunicação foi registrada com sucesso.<br><br>
+<strong>Código:</strong> ${retorno.codigo}
+`;
 
   successModal.classList.add("open");
 
@@ -1415,13 +1415,18 @@ try {
   form.reset();
 
 } catch (error) {
-  console.error("Erro ao cadastrar comunicação:", error);
 
-  document.getElementById("errorMessage").textContent =
-    error.message ||
-    "Não foi possível cadastrar a comunicação.";
+    console.error(error);
 
-  errorModal.classList.add("open");
+    let mensagem =
+        error.message ||
+        "Não foi possível cadastrar a comunicação.";
+
+    document.getElementById("errorMessage").textContent = mensagem;
+
+    errorModal.classList.add("open");
+
+}
 
 } finally {
   submitButton.disabled = false;
