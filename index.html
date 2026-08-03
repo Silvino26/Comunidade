@@ -1018,6 +1018,7 @@ function getCurrentTimeString(date) {
 
 function configureDateAndTimeLimits() {
   const now = new Date();
+  now.setMinutes(now.getMinutes() + 5);
   const today = getLocalDateString(now);
   dispatchDate.min = today;
 
@@ -1349,7 +1350,7 @@ form.addEventListener("submit", async event => {
   }
 
   if (!validateSchedule()) {
-    alert("Informe uma data e um horário atuais ou futuros.");
+    document.getElementById("errorMessage").textContent = "Informe uma data e um horário pelo menos 5 minutos à frente do horário atual."; errorModal.classList.add("open");
     return;
   }
 
@@ -1424,14 +1425,16 @@ if (retorno.incluidos > 0 && retorno.duplicados === 0) {
 
     successTitle.textContent = "Comunicado já agendado";
 
-    successIcon.className = "error-icon";
+    successIcon.className = "success-icon";
+    successIcon.style.background = "#4f6fae";
     successIcon.textContent = "ℹ";
 
 } else {
 
     successTitle.textContent = "Cadastro parcial";
 
-    successIcon.className = "error-icon";
+    successIcon.className = "success-icon";
+    successIcon.style.background = "#d3a642";
     successIcon.textContent = "⚠";
 
 }
