@@ -1052,6 +1052,8 @@ html>body{padding:0}
     #asserth-login-concept .al-rules { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px 18px; margin:-3px 0 20px; padding:0; list-style:none; color:var(--al-muted); font-size:12px; }
     #asserth-login-concept .al-rules li { display:flex; align-items:center; gap:7px; }
     #asserth-login-concept .al-rules li.is-valid { color:var(--al-green); }
+    #asserth-login-concept .al-dot { flex:none; position:relative; box-sizing:border-box; width:16px; height:16px; border:1.5px solid currentColor; border-radius:50%; transition:background .15s, border-color .15s; }
+    #asserth-login-concept .al-rules li.is-valid .al-dot { background:var(--al-green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5.5 12.5l4.2 4.2L18.5 7.8'/%3E%3C/svg%3E") center / 10px 10px no-repeat; border-color:var(--al-green); }
     @media (max-width:460px) { #asserth-login-concept .al-rules { grid-template-columns:1fr; } }
 
     @media (max-width:760px) {
@@ -1188,6 +1190,7 @@ html>body{padding:0}
 .pm-bulk-dropdown-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:2px 0 10px}
 .pm-bulk-dropdown-row strong{font-size:9px;font-weight:600;margin-right:auto}
 .pm-bulk-dropdown-row a{color:var(--pv-green);text-decoration:none;font-size:8.5px}
+#asserth-platform-overview .pm-bulk-dropdown-row a{font-size:8.5px;font-weight:500;line-height:1}
 .pm-row strong{display:block;font-size:9px;font-weight:500}
 .pm-row small,.pm-cell{color:var(--pv-muted);font-size:8px}
 .pm-row small{margin-top:3px}
@@ -1226,6 +1229,39 @@ html>body{padding:0}
 .pm-groups-picker .pm-group-list{display:none;position:absolute;z-index:60;top:calc(100% + 5px);left:0;width:100%;max-height:210px;overflow:auto;background:var(--pv-surface);box-shadow:0 10px 26px rgba(0,0,0,.12)}
 .pm-groups-picker.open .pm-group-list{display:grid}
 .pm-groups-picker+.pm-note{margin-top:12px}
+.pm-naoident-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 2px;border-bottom:1px solid var(--pv-line);font-size:8.5px}
+.pm-naoident-row span{color:var(--pv-muted)}
+.pm-naoident-row a{color:var(--pv-green);text-decoration:none;font-size:8.5px;white-space:nowrap}
+.pm-naoident-link-box{padding:10px 2px 14px;border-bottom:1px solid var(--pv-line)}
+.pm-naoident-link-box input{width:100%;box-sizing:border-box;border:1px solid var(--pv-line);border-radius:7px;padding:0 11px;min-height:36px;font:inherit;font-size:10px;background:var(--pv-surface);color:var(--pv-ink);margin-bottom:8px}
+.pm-naoident-link-box .pm-group-list{max-height:170px}
+.pm-naoident-link-box .pm-group-list button{display:block;width:100%;text-align:left;border:0;background:none;font:inherit;color:var(--pv-ink);padding:7px 8px;border-radius:5px;cursor:pointer;font-size:8px}
+.pm-naoident-link-box .pm-group-list button:hover{background:var(--pv-surface-soft)}
+.pm-naoident-link-cancel{display:inline-block;margin-top:2px;color:var(--pv-muted);text-decoration:none;font-size:8px}
+/* CORREÇÃO 05/10: a regra global '#asserth-platform-overview button,a{font:inherit}' (mais forte que classe) fazia os botões da lista de pessoas e o 'Cancelar' herdarem a fonte grande da página. Repetimos aqui com o ID para vencer. */
+#asserth-platform-overview .pm-naoident-link-box .pm-group-list{margin-top:0;gap:0;padding:3px;max-height:150px}
+#asserth-platform-overview .pm-naoident-link-box .pm-group-list button{font-size:8.5px;line-height:1.3;padding:6px 8px;min-height:0;font-weight:400}
+#asserth-platform-overview .pm-naoident-link-box .pm-group-list button strong{font-weight:600}
+#asserth-platform-overview .pm-naoident-link-box .pm-naoident-link-cancel{font-size:8.5px;line-height:1.3;margin-top:6px}
+#asserth-platform-overview .pm-naoident-row a{font-size:8.5px}
+/* CORREÇÃO 05/10: confirmação dentro do layout (substitui o pop-up nativo do navegador "comunidade-asserth.onrender.com diz") */
+#asserth-platform-overview .pm-confirm{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;padding:24px;background:color-mix(in srgb,#07100c 42%,transparent);backdrop-filter:blur(2px)}
+#asserth-platform-overview .pm-confirm-box{width:min(420px,100%);border:1px solid var(--pv-line);border-radius:14px;background:var(--pv-surface);box-shadow:0 24px 70px color-mix(in srgb,#000 22%,transparent);padding:20px 22px 18px;color:var(--pv-ink)}
+#asserth-platform-overview .pm-confirm-box h3{margin:0 0 8px;font-size:14px;font-weight:500;line-height:1.3}
+#asserth-platform-overview .pm-confirm-box p{margin:0;font-size:10.5px;line-height:1.55;color:var(--pv-muted)}
+#asserth-platform-overview .pm-confirm-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+#asserth-platform-overview .pm-confirm-actions button{font-size:10.5px;line-height:1;padding:0 16px;min-height:34px;border-radius:8px;border:1px solid var(--pv-line);background:var(--pv-surface);color:var(--pv-ink);cursor:pointer}
+#asserth-platform-overview .pm-confirm-actions button:hover{background:var(--pv-surface-soft)}
+#asserth-platform-overview .pm-confirm-actions button.is-primary{background:var(--pv-green);border-color:var(--pv-green);color:#fff}
+#asserth-platform-overview .pm-confirm-actions button.is-primary:hover{filter:brightness(1.08)}
+#asserth-platform-overview .pm-confirm-actions button.is-danger{background:var(--pv-red);border-color:var(--pv-red);color:#fff}
+/* Aviso dentro do formulário de Novo usuário (substitui a mensagem comprida que cobria os botões) */
+#asserth-platform-overview .pa-aviso{margin:0 24px 12px;padding:12px 14px;border:1px solid var(--pv-line);border-left:3px solid var(--pv-gold);border-radius:8px;background:var(--pv-surface-soft);color:var(--pv-ink);font-size:10px;line-height:1.5}
+#asserth-platform-overview .pa-aviso[hidden]{display:none}
+#asserth-platform-overview .pa-aviso strong{display:block;margin-bottom:4px;font-size:11px;font-weight:600}
+#asserth-platform-overview .pa-aviso p{margin:0 0 4px;color:var(--pv-muted)}
+#asserth-platform-overview .pa-aviso ol{margin:4px 0 0;padding-left:18px}
+#asserth-platform-overview .pa-aviso li{margin:2px 0}
 
 /* ===== grupos ===== */
 .pg-actions{display:flex;gap:10px;justify-content:flex-end}.pg-list{padding:0 28px}.pg-row{display:grid;grid-template-columns:2fr 1.2fr 1fr 1.1fr 82px;gap:22px;align-items:center;min-height:62px;border-bottom:1px solid var(--line,#d9e1de);font-size:12px}.pg-row strong{display:block;font-size:12px}.pg-cell{color:#66736e}.pg-status{display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border-radius:999px;background:#e7f2ee;color:#007b62;font-size:11px;white-space:nowrap}.pg-status:before{content:'';width:7px;height:7px;border-radius:50%;background:#00866a}.pg-status.warning{background:#fff1db;color:#ad6a00}.pg-status.warning:before{background:#c98117}.pg-status.pending{background:#eef0f2;color:#5b6a72}.pg-status.pending:before{background:#8b98a1}.pg-link{color:#007b62;text-decoration:none;justify-self:end;font-size:11px}.pg-row-actions{display:flex;flex-direction:column;align-items:flex-end;gap:4px;justify-self:end}.pg-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:27px 38px;padding:18px 4px 25px;border-bottom:1px solid var(--line,#d9e1de)}.pg-detail-grid span{display:block;color:#6b7773;font-size:10px;margin-bottom:9px}.pg-detail-grid strong{font-size:12px}.pg-editor{display:grid;grid-template-columns:128px 1fr;gap:28px;padding:25px 4px 0}.pg-photo{width:112px;height:112px;border-radius:50%;background:#e7f2ee;display:grid;place-items:center;overflow:hidden;border:1px solid #d6dfdc}.pg-photo img{width:100%;height:100%;object-fit:cover}.pg-photo-placeholder{font-size:34px;color:#00866a;font-weight:600}.pg-upload{display:block;width:112px;margin-top:10px;color:#007b62;font-size:11px;cursor:pointer;text-align:center}.pg-upload input{display:none}.pg-fields{display:grid;gap:15px}.pg-field label{display:block;font-size:11px;font-weight:600;margin-bottom:7px}.pg-field input,.pg-field textarea{width:100%;box-sizing:border-box;border:1px solid #d3ddda;border-radius:9px;padding:11px 13px;font:inherit;font-size:12px;background:#fff}.pg-field textarea{min-height:80px;resize:vertical}.pg-counter{text-align:right;color:#75817d;font-size:10px;margin-top:4px}.pg-permissions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.pg-check{display:flex;align-items:center;gap:9px;border:1px solid #d8e1de;border-radius:9px;padding:10px 11px;font-size:11px}.pg-check.locked{background:#f5f8f7;color:#66736e}.pg-note{margin-top:18px;padding:12px 14px;border-left:3px solid #00866a;background:#edf5f2;color:#61706b;font-size:11px;line-height:1.45}.pg-sync{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:18px;padding:12px 14px;background:#fafcfb;border:1px solid #d9e2df;border-radius:9px;font-size:11px}.pg-sync strong{display:block;margin-bottom:3px;font-size:11px}.pg-sync span{color:#66736e}.pg-sync button{border:0;background:none;color:#007b62;font-size:11px;font-weight:600;cursor:pointer}.pg-toast{position:fixed;right:28px;bottom:28px;background:#063f34;color:white;padding:13px 17px;border-radius:10px;box-shadow:0 12px 28px #0002;z-index:200;display:none;font-size:13px}.pg-toast.show{display:block}.pg-native-select{appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%233c4a46' stroke-width='2' d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center!important;border-radius:9px!important;font-size:12px!important}@media(max-width:850px){.pg-row{grid-template-columns:1fr 1fr}.pg-editor{grid-template-columns:1fr}.pg-photo-wrap{justify-self:start}.pg-detail-grid,.pg-permissions{grid-template-columns:1fr}}
@@ -1273,7 +1309,7 @@ html>body{padding:0}
 #asserth-platform-overview .pv-editor-toolbar{position:relative}.pv-emoji-menu{display:none;position:absolute;top:42px;left:160px;z-index:45;width:230px;padding:8px;border:1px solid var(--pv-line);border-radius:9px;background:var(--pv-surface);box-shadow:0 14px 34px rgba(0,0,0,.16);grid-template-columns:repeat(8,1fr);gap:3px}.pv-emoji-menu.is-open{display:grid}.pv-emoji-menu button{min-width:0!important;width:24px!important;height:24px!important;padding:0;border:0!important;background:transparent!important;font-size:14px!important}.pv-emoji-menu button:hover{background:var(--pv-surface-soft)!important}
 #asserth-platform-overview .pv-wa-body{background-image:none!important;background-color:#efeae2!important}
 #asserth-platform-overview .pv-calendar-day{font-size:6.3px!important}
-#asserth-platform-overview .pv-whatsapp{overflow-y:auto;overflow-x:hidden;border:1px solid #ded8ce;border-radius:12px;background:#efeae2;min-height:430px;max-height:520px}.pv-wa-body{min-height:430px;padding:70px 18px 28px;background-color:#efeae2;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23d9d0c3' stroke-width='1' opacity='.45'%3E%3Cpath d='M8 18c8-8 18 3 10 10S0 26 8 18Zm55-9 5 10 11 2-8 8 2 11-10-5-10 5 2-11-8-8 11-2Z'/%3E%3Ccircle cx='98' cy='72' r='12'/%3E%3Cpath d='M15 76c18-6 27 11 13 22M69 73c-8 4-8 16 2 20m19 14 18-18M42 48c4-12 18-12 22 0s-7 21-11 25c-5-5-15-13-11-25Z'/%3E%3C/g%3E%3C/svg%3E")}.pv-wa-bubble{position:relative;margin-left:auto;max-width:84%;padding:9px 10px 6px;border-radius:8px 2px 8px 8px;background:#d9fdd3;color:#111;font-family:Arial,sans-serif;font-size:11px;line-height:1.42;box-shadow:0 1px 1px rgba(0,0,0,.1)}.pv-wa-bubble::after{content:'';position:absolute;right:-7px;top:0;border-style:solid;border-width:0 0 9px 8px;border-color:transparent transparent transparent #d9fdd3}.pv-wa-image{display:none;width:100%;max-height:250px;object-fit:cover;margin-bottom:7px;border-radius:6px}.pv-wa-time{text-align:right;color:#66736d;font-size:7.5px;margin-top:4px}
+#asserth-platform-overview .pv-whatsapp{overflow-y:auto;overflow-x:hidden;border:1px solid #ded8ce;border-radius:12px;background:#efeae2;min-height:430px;max-height:520px}.pv-wa-body{min-height:430px;padding:70px 18px 28px;background-color:#efeae2;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23d9d0c3' stroke-width='1' opacity='.45'%3E%3Cpath d='M8 18c8-8 18 3 10 10S0 26 8 18Zm55-9 5 10 11 2-8 8 2 11-10-5-10 5 2-11-8-8 11-2Z'/%3E%3Ccircle cx='98' cy='72' r='12'/%3E%3Cpath d='M15 76c18-6 27 11 13 22M69 73c-8 4-8 16 2 20m19 14 18-18M42 48c4-12 18-12 22 0s-7 21-11 25c-5-5-15-13-11-25Z'/%3E%3C/g%3E%3C/svg%3E")}.pv-wa-bubble{position:relative;margin-left:auto;max-width:84%;padding:9px 10px 6px;border-radius:8px 2px 8px 8px;background:#d9fdd3;color:#111;font-family:Arial,sans-serif;font-size:11px;line-height:1.42;box-shadow:0 1px 1px rgba(0,0,0,.1)}.pv-wa-bubble::after{content:'';position:absolute;right:-7px;top:0;border-style:solid;border-width:0 0 9px 8px;border-color:transparent transparent transparent #d9fdd3}.pv-wa-image{display:none;width:100%;max-height:250px;object-fit:cover;margin-bottom:7px;border-radius:6px}video.pv-wa-image{object-fit:contain;background:#000;max-height:340px}.pv-wa-time{text-align:right;color:#66736d;font-size:7.5px;margin-top:4px}
 #asserth-platform-overview .pv-wa-line{min-height:1.42em}#asserth-platform-overview .pv-wa-list{position:relative;padding-left:14px}#asserth-platform-overview .pv-wa-list::before{content:'•';position:absolute;left:2px}
 @media(max-width:760px){#asserth-platform-overview .pv-page-head{flex-direction:column}.pv-comm-head-side{width:100%;justify-items:stretch}.pv-comm-actions{width:100%}.pv-comm-button{flex:1}.pv-comm-row{grid-template-columns:1fr auto}.pv-comm-cell:not(:last-child),.pv-comm-state{display:none}.pv-filter-grid,.pv-comm-form,.pv-inline-choice{grid-template-columns:1fr}.pv-comm-form .is-full{grid-column:1}}
 
@@ -1488,17 +1524,17 @@ html>body{padding:0}
       <section class="al-form-wrap al-flow-state" id="al-recovery-email">
         <a href="#" class="al-back" data-back-login><i data-lucide="arrow-left" aria-hidden="true"></i> Voltar para o login</a>
         <span class="al-eyebrow">Recuperação de acesso</span><h2>Esqueceu sua senha?</h2><p class="al-intro">Informe o e-mail vinculado ao seu acesso. Enviaremos um código para confirmar sua identidade.</p>
-        <form id="al-email-form" novalidate><div class="al-field"><label for="al-recovery-address">E-mail corporativo</label><div class="al-input-wrap"><input id="al-recovery-address" type="email" autocomplete="email" value="ana.silva@asserth.com.br"><i class="al-input-icon" data-lucide="mail" aria-hidden="true"></i></div></div><button class="al-submit" type="button" id="al-send-code">Enviar código de validação <i data-lucide="arrow-right" aria-hidden="true"></i></button><p class="al-feedback" id="al-email-feedback" role="status"></p></form>
+        <form id="al-email-form" novalidate><div class="al-field"><label for="al-recovery-address">E-mail corporativo</label><div class="al-input-wrap"><input id="al-recovery-address" type="email" autocomplete="email" placeholder="nome@asserth.com.br"><i class="al-input-icon" data-lucide="mail" aria-hidden="true"></i></div></div><button class="al-submit" type="button" id="al-send-code">Enviar código de validação <i data-lucide="arrow-right" aria-hidden="true"></i></button><p class="al-feedback" id="al-email-feedback" role="status"></p></form>
       </section>
       <section class="al-form-wrap al-flow-state" id="al-recovery-code">
         <a href="#" class="al-back" data-back-login><i data-lucide="arrow-left" aria-hidden="true"></i> Voltar para o login</a>
-        <span class="al-eyebrow">Validação de identidade</span><h2>Digite o código</h2><p class="al-intro">Enviamos um código de 6 dígitos para o e-mail vinculado ao acesso.</p>
-        <form id="al-code-form" novalidate><div class="al-field"><label for="al-code">Código de validação</label><div class="al-input-wrap"><input id="al-code" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="000000"><i class="al-input-icon" data-lucide="key-round" aria-hidden="true"></i></div></div><p class="al-code-note">Para testar o protótipo, utilize o código <strong>123456</strong>.</p><button class="al-submit" type="button" id="al-validate-code">Validar código <i data-lucide="arrow-right" aria-hidden="true"></i></button><a href="#" class="al-secondary" id="al-resend">Reenviar código</a><p class="al-feedback" id="al-code-feedback" role="status"></p></form>
+        <span class="al-eyebrow">Validação de identidade</span><h2>Digite o código</h2><p class="al-intro">Enviamos um código para o e-mail vinculado ao acesso. Digite-o exatamente como recebeu.</p>
+        <form id="al-code-form" novalidate><div class="al-field"><label for="al-code">Código de validação</label><div class="al-input-wrap"><input id="al-code" inputmode="numeric" maxlength="10" autocomplete="one-time-code" placeholder="000000"><i class="al-input-icon" data-lucide="key-round" aria-hidden="true"></i></div></div><p class="al-code-note">O código chega em até 1 minuto. Confira também a caixa de spam.</p><button class="al-submit" type="button" id="al-validate-code">Validar código <i data-lucide="arrow-right" aria-hidden="true"></i></button><a href="#" class="al-secondary" id="al-resend">Reenviar código</a><p class="al-feedback" id="al-code-feedback" role="status"></p></form>
       </section>
       <section class="al-form-wrap al-flow-state" id="al-recovery-password">
         <a href="#" class="al-back" data-back-login><i data-lucide="arrow-left" aria-hidden="true"></i> Voltar para o login</a>
         <span class="al-eyebrow">Nova senha</span><h2>Crie uma nova senha</h2><p class="al-intro">Defina a nova senha que será utilizada no próximo acesso à plataforma.</p>
-        <form id="al-password-form" novalidate><div class="al-field"><label for="al-new-password">Nova senha</label><div class="al-input-wrap"><input id="al-new-password" type="password" autocomplete="new-password"><i class="al-input-icon" data-lucide="lock-keyhole" aria-hidden="true"></i></div></div><div class="al-field"><label for="al-confirm-password">Confirmar nova senha</label><div class="al-input-wrap"><input id="al-confirm-password" type="password" autocomplete="new-password"><i class="al-input-icon" data-lucide="check" aria-hidden="true"></i></div></div><ul class="al-rules"><li id="al-rule-length"><i data-lucide="circle" aria-hidden="true"></i> Pelo menos 8 caracteres</li><li id="al-rule-number"><i data-lucide="circle" aria-hidden="true"></i> Pelo menos um número</li><li id="al-rule-special"><i data-lucide="circle" aria-hidden="true"></i> Pelo menos um caractere especial</li><li id="al-rule-equal"><i data-lucide="circle" aria-hidden="true"></i> As senhas devem ser iguais</li></ul><button class="al-submit" type="button" id="al-change-password" disabled>Alterar senha <i data-lucide="check" aria-hidden="true"></i></button><p class="al-feedback" id="al-password-feedback" role="status"></p></form>
+        <form id="al-password-form" novalidate><div class="al-field"><label for="al-new-password">Nova senha</label><div class="al-input-wrap"><input id="al-new-password" type="password" autocomplete="new-password"><i class="al-input-icon" data-lucide="lock-keyhole" aria-hidden="true"></i></div></div><div class="al-field"><label for="al-confirm-password">Confirmar nova senha</label><div class="al-input-wrap"><input id="al-confirm-password" type="password" autocomplete="new-password"><i class="al-input-icon" data-lucide="check" aria-hidden="true"></i></div></div><ul class="al-rules"><li id="al-rule-length"><span class="al-dot" aria-hidden="true"></span> Pelo menos 8 caracteres</li><li id="al-rule-number"><span class="al-dot" aria-hidden="true"></span> Pelo menos um número</li><li id="al-rule-special"><span class="al-dot" aria-hidden="true"></span> Pelo menos um caractere especial</li><li id="al-rule-equal"><span class="al-dot" aria-hidden="true"></span> As senhas devem ser iguais</li></ul><button class="al-submit" type="button" id="al-change-password" disabled>Alterar senha</button><p class="al-feedback" id="al-password-feedback" role="status"></p></form>
       </section>
       <section class="al-form-wrap al-flow-state" id="al-recovery-success">
         <div class="al-success-mark"><i data-lucide="shield-check" aria-hidden="true"></i></div><span class="al-eyebrow">Acesso recuperado</span><h2>Senha alterada</h2><p class="al-intro">Sua nova senha já está ativa. Retornando automaticamente para o login.</p>
@@ -1563,29 +1599,95 @@ html>body{padding:0}
         Object.entries(recoveryStates).forEach(([name, element]) => element.classList.toggle('is-active', name === step));
         if (window.lucide) window.lucide.createIcons({ attrs: { width:16, height:16 } });
       };
-      root.querySelector('#al-forgot').addEventListener('click', (event) => { event.preventDefault(); showStep('email'); });
-      root.querySelectorAll('[data-back-login]').forEach(link => link.addEventListener('click', (event) => { event.preventDefault(); showStep('login'); }));
-      root.querySelector('#al-send-code').addEventListener('click', () => {
+      // ---- Recuperação de senha (Supabase Auth: código de 6 dígitos por e-mail) ----
+      // Passos: 1) pedir código (resetPasswordForEmail)  2) validar (verifyOtp)
+      // 3) trocar a senha (updateUser). Tudo vive em window.AsserthAuth.* (shell).
+      let recoveryEmail = '';
+      let firstAccess = false;
+      let recoveryVerified = false;
+      let resendTimer = null;
+      const authApi = () => window.AsserthAuth || {};
+      const resetRecovery = () => {
+        if (recoveryVerified && typeof authApi().cancelarRecuperacao === 'function') authApi().cancelarRecuperacao();
+        recoveryVerified = false;
+        if (resendTimer) { clearInterval(resendTimer); resendTimer = null; }
+      };
+      const startResendCooldown = (seconds) => {
+        const link = root.querySelector('#al-resend');
+        if (resendTimer) clearInterval(resendTimer);
+        let left = seconds;
+        link.dataset.locked = '1';
+        link.textContent = 'Reenviar código (' + left + 's)';
+        resendTimer = setInterval(() => {
+          left -= 1;
+          if (left <= 0) { clearInterval(resendTimer); resendTimer = null; delete link.dataset.locked; link.textContent = 'Reenviar código'; }
+          else link.textContent = 'Reenviar código (' + left + 's)';
+        }, 1000);
+      };
+      root.querySelector('#al-forgot').addEventListener('click', (event) => {
+        event.preventDefault();
+        const typed = email.value.trim();
         const address = root.querySelector('#al-recovery-address');
-        const emailFeedback = root.querySelector('#al-email-feedback');
-        const sendButton = root.querySelector('#al-send-code');
-        emailFeedback.textContent = '';
-        if (!address.value.includes('@')) { emailFeedback.textContent = 'Informe o e-mail vinculado ao acesso da plataforma.'; return; }
-        sendButton.disabled = true;
-        sendButton.innerHTML = 'Código enviado <i data-lucide="check" aria-hidden="true"></i>';
-        emailFeedback.style.color = 'var(--al-green)';
-        emailFeedback.textContent = 'Código enviado para o e-mail vinculado.';
-        if (window.lucide) window.lucide.createIcons({ attrs: { width:16, height:16 } });
-        setTimeout(() => { sendButton.disabled = false; sendButton.innerHTML = 'Enviar código de validação <i data-lucide="arrow-right" aria-hidden="true"></i>'; showStep('code'); }, 900);
+        if (typed.includes('@') && !address.value) address.value = typed;
+        root.querySelector('#al-email-feedback').textContent = '';
+        showStep('email');
       });
-      root.querySelector('#al-validate-code').addEventListener('click', () => {
+      root.querySelectorAll('[data-back-login]').forEach(link => link.addEventListener('click', (event) => { event.preventDefault(); resetRecovery(); if (firstAccess) leaveFirstAccess(); showStep('login'); }));
+      const requestCode = async (fromResend) => {
+        const address = root.querySelector('#al-recovery-address');
+        const feedbackEl = fromResend ? root.querySelector('#al-code-feedback') : root.querySelector('#al-email-feedback');
+        const sendButton = root.querySelector('#al-send-code');
+        feedbackEl.textContent = '';
+        feedbackEl.style.color = '';
+        const typedEmail = (fromResend ? recoveryEmail : address.value).trim().toLowerCase();
+        if (!typedEmail.includes('@')) { feedbackEl.textContent = 'Informe o e-mail vinculado ao acesso da plataforma.'; return; }
+        if (typeof authApi().enviarCodigoRecuperacao !== 'function') { feedbackEl.style.color = 'var(--al-red)'; feedbackEl.textContent = 'Recuperação de senha indisponível no momento.'; return; }
+        sendButton.disabled = true;
+        const originalLabel = sendButton.innerHTML;
+        sendButton.textContent = 'Enviando...';
+        let result;
+        try { result = await authApi().enviarCodigoRecuperacao(typedEmail); }
+        catch (err) { result = { success: false, message: 'Não foi possível enviar o código agora. Tente novamente em instantes.' }; }
+        sendButton.disabled = false;
+        sendButton.innerHTML = originalLabel;
+        if (window.lucide) window.lucide.createIcons({ attrs: { width:16, height:16 } });
+        if (!result || !result.success) { feedbackEl.style.color = 'var(--al-red)'; feedbackEl.textContent = (result && result.message) || 'Não foi possível enviar o código agora.'; return; }
+        recoveryEmail = typedEmail;
+        startResendCooldown(60);
+        if (fromResend) { feedbackEl.style.color = 'var(--al-green)'; feedbackEl.textContent = 'Novo código enviado.'; }
+        else { root.querySelector('#al-code').value = ''; root.querySelector('#al-code-feedback').textContent = ''; showStep('code'); root.querySelector('#al-code').focus(); }
+      };
+      root.querySelector('#al-send-code').addEventListener('click', () => requestCode(false));
+      root.querySelector('#al-recovery-address').addEventListener('keydown', (event) => { if (event.key === 'Enter') { event.preventDefault(); requestCode(false); } });
+      root.querySelector('#al-code').addEventListener('input', (event) => { event.target.value = event.target.value.replace(/\D/g, '').slice(0, 10); });
+      const validateCode = async () => {
         const code = root.querySelector('#al-code').value.trim();
         const codeFeedback = root.querySelector('#al-code-feedback');
+        const validateButton = root.querySelector('#al-validate-code');
         codeFeedback.textContent = '';
-        if (code !== '123456') { codeFeedback.textContent = 'Código inválido. Para o protótipo, utilize 123456.'; return; }
+        codeFeedback.style.color = '';
+        if (code.length < 6) { codeFeedback.style.color = 'var(--al-red)'; codeFeedback.textContent = 'Digite o código completo enviado ao seu e-mail.'; return; }
+        if (typeof authApi().validarCodigoRecuperacao !== 'function') { codeFeedback.style.color = 'var(--al-red)'; codeFeedback.textContent = 'Recuperação de senha indisponível no momento.'; return; }
+        validateButton.disabled = true;
+        const originalLabel = validateButton.innerHTML;
+        validateButton.textContent = 'Validando...';
+        let result;
+        try { result = await authApi().validarCodigoRecuperacao(recoveryEmail, code); }
+        catch (err) { result = { success: false, message: 'Não foi possível validar o código agora. Tente novamente.' }; }
+        validateButton.disabled = false;
+        validateButton.innerHTML = originalLabel;
+        if (window.lucide) window.lucide.createIcons({ attrs: { width:16, height:16 } });
+        if (!result || !result.success) { codeFeedback.style.color = 'var(--al-red)'; codeFeedback.textContent = (result && result.message) || 'Código inválido ou expirado.'; return; }
+        recoveryVerified = true;
         showStep('password');
+      };
+      root.querySelector('#al-validate-code').addEventListener('click', validateCode);
+      root.querySelector('#al-code').addEventListener('keydown', (event) => { if (event.key === 'Enter') { event.preventDefault(); validateCode(); } });
+      root.querySelector('#al-resend').addEventListener('click', (event) => {
+        event.preventDefault();
+        if (event.currentTarget.dataset.locked) return;
+        requestCode(true);
       });
-      root.querySelector('#al-resend').addEventListener('click', (event) => { event.preventDefault(); event.currentTarget.textContent = 'Código reenviado'; });
       const newPassword = root.querySelector('#al-new-password');
       const confirmPassword = root.querySelector('#al-confirm-password');
       const changePassword = root.querySelector('#al-change-password');
@@ -1601,42 +1703,98 @@ html>body{padding:0}
       };
       newPassword.addEventListener('input', validatePassword);
       confirmPassword.addEventListener('input', validatePassword);
-      changePassword.addEventListener('click', () => {
+      changePassword.addEventListener('click', async () => {
         const passwordFeedback = root.querySelector('#al-password-feedback');
         passwordFeedback.textContent = '';
-        if (!validatePassword()) { passwordFeedback.textContent = 'Confira os requisitos da nova senha.'; return; }
+        passwordFeedback.style.color = '';
+        if (!validatePassword()) { passwordFeedback.style.color = 'var(--al-red)'; passwordFeedback.textContent = 'Confira os requisitos da nova senha.'; return; }
+        if (typeof authApi().alterarSenhaRecuperacao !== 'function') { passwordFeedback.style.color = 'var(--al-red)'; passwordFeedback.textContent = 'Recuperação de senha indisponível no momento.'; return; }
         changePassword.disabled = true;
         changePassword.textContent = 'Atualizando senha...';
+        let result;
+        try { result = await authApi().alterarSenhaRecuperacao(newPassword.value); }
+        catch (err) { result = { success: false, message: 'Não foi possível alterar a senha agora. Tente novamente.' }; }
+        if (!result || !result.success) {
+          changePassword.disabled = false;
+          changePassword.textContent = 'Alterar senha';
+          if (window.lucide) window.lucide.createIcons({ attrs: { width:16, height:16 } });
+          passwordFeedback.style.color = 'var(--al-red)';
+          passwordFeedback.textContent = (result && result.message) || 'Não foi possível alterar a senha.';
+          return;
+        }
+        recoveryVerified = false;
+        showStep('success');
         setTimeout(() => {
-          showStep('success');
-          setTimeout(() => {
-            password.value = '';
-            newPassword.value = '';
-            confirmPassword.value = '';
-            changePassword.disabled = true;
-            changePassword.innerHTML = 'Alterar senha <i data-lucide="check" aria-hidden="true"></i>';
-            submit.innerHTML = 'Entrar <i data-lucide="arrow-right" aria-hidden="true"></i>';
-            feedback.textContent = 'Senha alterada com sucesso. Entre com a nova senha.';
-            feedback.style.color = 'var(--al-green)';
-            showStep('login');
-          }, 1200);
-        }, 700);
+          password.value = '';
+          newPassword.value = '';
+          confirmPassword.value = '';
+          changePassword.disabled = true;
+          changePassword.textContent = 'Alterar senha';
+          submit.innerHTML = 'Entrar <i data-lucide="arrow-right" aria-hidden="true"></i>';
+          feedback.textContent = firstAccess ? 'Senha criada com sucesso. Entre com o seu e-mail e a senha que você acabou de criar.' : 'Senha alterada com sucesso. Entre com a nova senha.';
+          feedback.style.color = 'var(--al-green)';
+          if (firstAccess) { email.value = recoveryEmail; leaveFirstAccess(); }
+          showStep('login');
+        }, 1800);
       });
+      // ---- Primeiro acesso (link do e-mail de boas-vindas: /?primeiro-acesso=1&email=...) ----
+      // Reaproveita os mesmos passos da recuperação (código por e-mail → nova
+      // senha → login), só com textos de boas-vindas e o e-mail já preenchido.
+      const faMap = [
+        ['#al-recovery-email .al-eyebrow', 'Primeiro acesso'],
+        ['#al-recovery-email h2', 'Bem-vindo à plataforma'],
+        ['#al-recovery-email .al-intro', 'Para ativar o seu acesso, enviaremos um código para o e-mail abaixo. Depois, você cria a sua senha.'],
+        ['#al-recovery-password .al-eyebrow', 'Primeiro acesso'],
+        ['#al-recovery-password h2', 'Crie a sua senha'],
+        ['#al-recovery-password .al-intro', 'Defina a senha que você usará para entrar na plataforma.'],
+        ['#al-recovery-success .al-eyebrow', 'Acesso ativado'],
+        ['#al-recovery-success h2', 'Senha criada'],
+        ['#al-recovery-success .al-intro', 'Sua senha já está ativa. Direcionando você para o login.']
+      ];
+      const enterFirstAccess = (addr) => {
+        firstAccess = true;
+        faMap.forEach(([sel, txt]) => { const el = root.querySelector(sel); if (el) { if (el.dataset.orig === undefined) el.dataset.orig = el.textContent; el.textContent = txt; } });
+        const input = root.querySelector('#al-recovery-address');
+        input.value = addr; input.readOnly = !!addr;
+        const btn = root.querySelector('#al-send-code');
+        if (btn.dataset.orig === undefined) btn.dataset.orig = btn.innerHTML;
+        btn.innerHTML = 'Enviar código de ativação <i data-lucide="arrow-right" aria-hidden="true"></i>';
+        root.querySelector('#al-email-feedback').textContent = '';
+        showStep('email');
+      };
+      const leaveFirstAccess = () => {
+        firstAccess = false;
+        faMap.forEach(([sel]) => { const el = root.querySelector(sel); if (el && el.dataset.orig !== undefined) el.textContent = el.dataset.orig; });
+        const input = root.querySelector('#al-recovery-address'); input.readOnly = false;
+        const btn = root.querySelector('#al-send-code'); if (btn.dataset.orig !== undefined) btn.innerHTML = btn.dataset.orig;
+        try { history.replaceState({}, '', location.pathname + location.hash); } catch (err) {}
+        if (window.lucide) window.lucide.createIcons({ attrs: { width:16, height:16 } });
+      };
+      try {
+        const qs = new URLSearchParams(location.search);
+        if (qs.has('primeiro-acesso')) {
+          const addr = (qs.get('email') || '').trim().toLowerCase();
+          enterFirstAccess(addr.includes('@') ? addr : '');
+        }
+      } catch (err) {}
       form.addEventListener('submit', (event) => {
         event.preventDefault();
         feedback.textContent = '';
         feedback.style.color = '';
         if (!email.value.includes('@') || !password.value) { feedback.textContent = 'Confira o e-mail e a senha para continuar.'; return; }
-        submit.disabled = true; submit.textContent = 'Validando acesso...';
+        delete submit.dataset.state; submit.disabled = true; submit.textContent = 'Validando acesso...';
 
         const finish = (result) => {
           result = result || {};
           submit.disabled = false;
           if (result.success) {
-            submit.innerHTML = 'Acesso validado <i data-lucide="check" aria-hidden="true"></i>';
-            feedback.style.color = 'var(--al-green)';
-            feedback.textContent = result.message || 'Tudo certo. Direcionando para a plataforma.';
+            // O sinal de sucesso fica DENTRO do botão (sem mensagem embaixo).
+            // O shell observa data-state="ok" para abrir a plataforma.
+            submit.dataset.state = 'ok';
+            submit.textContent = 'Acesso validado';
+            feedback.textContent = '';
           } else {
+            delete submit.dataset.state;
             submit.innerHTML = 'Entrar <i data-lucide="arrow-right" aria-hidden="true"></i>';
             feedback.style.color = 'var(--al-red)';
             feedback.textContent = result.message || 'Não foi possível validar o acesso. Verifique os dados e tente novamente.';
@@ -2043,8 +2201,8 @@ html>body{padding:0}
 </script>
 
 <section id="view-membros" class="view pv-main" data-view="membros" hidden>
-<div class="pv-page-head"><div><span class="pv-kicker">Comunidade</span><h1>Membros</h1><p>Consulte e gerencie as pessoas registradas na comunidade conforme o seu acesso.</p></div><div class="pv-comm-head-side"><div class="pv-profile"><input class="pv-profile-toggle" id="pv-profile-toggle-membros" type="checkbox"><label class="pv-profile-btn" for="pv-profile-toggle-membros" aria-label="Abrir opções do usuário"><span class="pv-avatar">AS</span></label><div class="pv-profile-menu" id="pv-profile-menu-membros"><div class="pv-profile-summary"><strong>Ana Silva</strong><span>Administradora · Tecnologia</span></div><a href="#pv-native-profile"><i data-lucide="user-round" aria-hidden="true"></i> Meu perfil</a><a href="#pv-native-preferences"><i data-lucide="palette" aria-hidden="true"></i> Aparência e preferências</a><a href="#pv-native-notifications"><i data-lucide="bell" aria-hidden="true"></i> Notificações</a><a href="#pv-native-logout"><i data-lucide="log-out" aria-hidden="true"></i> Sair</a></div></div><div class="pm-actions"><a class="pv-comm-button" href="#membros-pm-filter"><i data-lucide="sliders-horizontal"></i>Filtrar</a><button class="pv-comm-button" id="membros-pm-export"><i data-lucide="download"></i>Exportar</button><a class="pv-comm-button" href="#membros-pm-acoes" id="membros-pm-acoes-toggle"><i data-lucide="users" aria-hidden="true"></i>Ações</a></div></div></div><div class="pv-metrics"><div class="pv-metric"><span>Relação atual</span><strong id="membros-pm-total">0</strong><small>registros visíveis</small></div><div class="pv-metric"><span>Na comunidade</span><strong id="membros-pm-included">0</strong><small>presença confirmada</small></div><div class="pv-metric"><span>Convite enviado</span><strong id="membros-pm-invited">0</strong><small>aguardando confirmação</small></div><div class="pv-metric"><span>Pendente</span><strong id="membros-pm-pending">0</strong><small title="Sem confirmação, ainda não processado">sem confirmação</small></div><div class="pv-metric"><span>Precisam de atenção</span><strong id="membros-pm-errors">0</strong><small title="Telefone divergente, erro ou não identificado">erro ou divergência</small></div></div><section class="pv-section"><div class="pv-comm-toolbar"><div><h2>Relação atual de membros</h2><p>A relação inclui pessoas confirmadas, convidadas e registros com divergência. Para incluir, remover de um grupo ou retirar alguém da comunidade, use o botão "Ações" acima.</p></div><span class="pv-comm-cell" id="membros-pm-label"></span></div><div class="pm-list" id="membros-pm-list"></div><div class="pv-pagination"><span id="membros-pm-summary"></span><div class="pv-page-buttons" id="membros-pm-pages"></div></div></section>
-<section class="pv-native-panel" id="membros-pm-filter"><div class="pv-native-drawer"><div class="pv-native-head"><div><h2>Filtrar membros</h2><p>Localize apenas os registros necessários.</p></div><a class="pv-native-close" href="#">×</a></div><div class="pv-native-body"><div class="pm-filter-grid"><div class="pv-native-field"><label>Nome</label><input id="membros-pm-q" placeholder="Digite para pesquisar"></div><div class="pv-native-field"><label>Tipo de membro</label><select id="membros-pm-type"><option value="">Todos</option><option>Colaborador</option><option>Prestador</option></select></div><div class="pv-native-field"><label>Status</label><select id="membros-pm-status"><option value="">Todos</option><option value="atencao">Precisam de atenção (agrupado)</option><option value="incluido">Incluído</option><option value="convite_pendente">Convite enviado (aguardando confirmação)</option><option value="pendente_sem_convite">Pendente (sem confirmação)</option><option value="telefone_divergente">Telefone com divergência</option><option value="erro_processamento">Erro de processamento</option><option value="nao_identificado">Não identificado</option><option value="removido">Removido da comunidade</option><option value="ausente">Ausente (saiu após confirmação)</option></select></div><div class="pv-native-field"><label>Grupo</label><select id="membros-pm-group"><option value="">Todos</option><option>Avisos</option><option>Financeiro</option><option>Departamento Pessoal</option></select></div></div></div><div class="pv-native-actions"><a class="pv-native-secondary" id="membros-pm-clear" href="#">Limpar</a><a id="membros-pm-apply" href="#">Aplicar filtros</a></div></div></section><section class="pv-native-panel" id="membros-pm-detail"><div class="pv-native-drawer is-wide"><div class="pv-native-head"><div><h2>Detalhes do membro</h2><p>Consulte o cadastro e a situação real nos grupos de WhatsApp.</p></div><a class="pv-native-close" href="#">×</a></div><div class="pv-native-body"><div class="pm-detail-grid" id="membros-pm-detail-data"></div><h3 style="font-size:10px">Grupos vinculados (situação real no WhatsApp)</h3><div class="pm-groups" id="membros-pm-groups-view"><span class="pm-cell">Carregando...</span></div><p class="pm-note" id="membros-pm-groups-note">Esta lista reflete a última sincronização de grupos (a cada 15 minutos) - pode levar alguns minutos para refletir uma movimentação recente.</p><p class="pm-note">Para incluir, remover de um grupo ou retirar da comunidade, use o botão "Ações" no topo da tela - vale tanto para 1 pessoa quanto para várias de uma vez.</p></div><div class="pv-native-actions"><a class="pv-native-secondary" href="#">Fechar</a></div></div></section><section class="pv-native-panel" id="membros-pm-acoes"><div class="pv-native-drawer is-wide"><div class="pv-native-head"><div><h2>Ações</h2><p>Incluir/remover pessoas de um grupo ou retirar da comunidade - vale para 1 pessoa ou para várias de uma vez.</p></div><a class="pv-native-close" href="#" id="membros-pm-acao-close">×</a></div><div class="pv-native-body"><div class="pv-native-field"><label>O que você quer fazer?</label><select id="membros-pm-acao-tipo"><option value="">Selecione</option><option value="INCLUIR_GRUPO">Incluir em um grupo</option><option value="REMOVER_GRUPO">Remover de um grupo</option><option value="RETIRAR_COMUNIDADE">Retirar da comunidade</option></select></div><div class="pv-native-field" id="membros-pm-acao-grupo-wrap" style="display:none"><label id="membros-pm-acao-grupo-label">Grupo</label><select id="membros-pm-acao-grupo"></select></div><p class="pm-note" id="membros-pm-acao-nota" style="display:none">O grupo Avisos não aparece aqui: todo mundo confirmado na comunidade já está nele, e removê-lo de lá é o mesmo que retirar a pessoa da comunidade (use a ação "Retirar da comunidade").</p><div id="membros-pm-acao-picker" style="display:none"><div class="pv-native-field"><label>Buscar pessoa</label><input id="membros-pm-acao-busca" placeholder="Digite para filtrar a lista abaixo"></div><div class="pm-bulk-dropdown-row"><strong id="membros-pm-acao-count">0 selecionado(s)</strong><a href="#" id="membros-pm-acao-select-all">Selecionar todos</a><a href="#" id="membros-pm-acao-select-none">Limpar seleção</a></div><div class="pm-group-list" id="membros-pm-acao-list"></div></div><span class="pa-error" id="membros-pm-bulk-error"></span></div><div class="pv-native-actions"><a class="pv-native-secondary" href="#">Cancelar</a><a href="#" id="membros-pm-acao-submit">Enviar solicitação</a></div></div></section><div class="pv-toast" id="membros-pm-toast"><i data-lucide="info" aria-hidden="true"></i><span></span></div>
+<div class="pv-page-head"><div><span class="pv-kicker">Comunidade</span><h1>Membros</h1><p>Consulte e gerencie as pessoas registradas na comunidade conforme o seu acesso.</p></div><div class="pv-comm-head-side"><div class="pv-profile"><input class="pv-profile-toggle" id="pv-profile-toggle-membros" type="checkbox"><label class="pv-profile-btn" for="pv-profile-toggle-membros" aria-label="Abrir opções do usuário"><span class="pv-avatar">AS</span></label><div class="pv-profile-menu" id="pv-profile-menu-membros"><div class="pv-profile-summary"><strong>Ana Silva</strong><span>Administradora · Tecnologia</span></div><a href="#pv-native-profile"><i data-lucide="user-round" aria-hidden="true"></i> Meu perfil</a><a href="#pv-native-preferences"><i data-lucide="palette" aria-hidden="true"></i> Aparência e preferências</a><a href="#pv-native-notifications"><i data-lucide="bell" aria-hidden="true"></i> Notificações</a><a href="#pv-native-logout"><i data-lucide="log-out" aria-hidden="true"></i> Sair</a></div></div><div class="pm-actions"><a class="pv-comm-button" href="#membros-pm-filter"><i data-lucide="sliders-horizontal"></i>Filtrar</a><button class="pv-comm-button" id="membros-pm-export"><i data-lucide="download"></i>Exportar</button><a class="pv-comm-button" href="#membros-pm-acoes" id="membros-pm-acoes-toggle"><i data-lucide="users" aria-hidden="true"></i>Ações</a><a class="pv-comm-button" href="#membros-pm-naoident" id="membros-pm-naoident-toggle"><i data-lucide="help-circle" aria-hidden="true"></i>Não identificados</a></div></div></div><div class="pv-metrics"><div class="pv-metric"><span>Relação atual</span><strong id="membros-pm-total">0</strong><small>registros visíveis</small></div><div class="pv-metric"><span>Na comunidade</span><strong id="membros-pm-included">0</strong><small>presença confirmada</small></div><div class="pv-metric"><span>Convite enviado</span><strong id="membros-pm-invited">0</strong><small>aguardando confirmação</small></div><div class="pv-metric"><span>Pendente</span><strong id="membros-pm-pending">0</strong><small title="Sem confirmação, ainda não processado">sem confirmação</small></div><div class="pv-metric"><span>Precisam de atenção</span><strong id="membros-pm-errors">0</strong><small title="Telefone divergente, erro ou não identificado">erro ou divergência</small></div></div><section class="pv-section"><div class="pv-comm-toolbar"><div><h2>Relação atual de membros</h2><p>A relação inclui pessoas confirmadas, convidadas e registros com divergência. Para incluir, remover de um grupo ou retirar alguém da comunidade, use o botão "Ações" acima.</p></div><span class="pv-comm-cell" id="membros-pm-label"></span></div><div class="pm-list" id="membros-pm-list"></div><div class="pv-pagination"><span id="membros-pm-summary"></span><div class="pv-page-buttons" id="membros-pm-pages"></div></div></section>
+<section class="pv-native-panel" id="membros-pm-filter"><div class="pv-native-drawer"><div class="pv-native-head"><div><h2>Filtrar membros</h2><p>Localize apenas os registros necessários.</p></div><a class="pv-native-close" href="#">×</a></div><div class="pv-native-body"><div class="pm-filter-grid"><div class="pv-native-field"><label>Nome</label><input id="membros-pm-q" placeholder="Digite para pesquisar"></div><div class="pv-native-field"><label>Tipo de membro</label><select id="membros-pm-type"><option value="">Todos</option><option>Colaborador</option><option>Prestador</option></select></div><div class="pv-native-field"><label>Status</label><select id="membros-pm-status"><option value="">Todos</option><option value="atencao">Precisam de atenção (agrupado)</option><option value="incluido">Incluído</option><option value="convite_pendente">Convite enviado (aguardando confirmação)</option><option value="pendente_sem_convite">Pendente (sem confirmação)</option><option value="telefone_divergente">Telefone com divergência</option><option value="erro_processamento">Erro de processamento</option><option value="nao_identificado">Não identificado</option><option value="removido">Removido da comunidade</option><option value="ausente">Ausente (saiu após confirmação)</option></select></div><div class="pv-native-field"><label>Grupo</label><select id="membros-pm-group"><option value="">Todos</option><option>Avisos</option><option>Financeiro</option><option>Departamento Pessoal</option></select></div></div></div><div class="pv-native-actions"><a class="pv-native-secondary" id="membros-pm-clear" href="#">Limpar</a><a id="membros-pm-apply" href="#">Aplicar filtros</a></div></div></section><section class="pv-native-panel" id="membros-pm-detail"><div class="pv-native-drawer is-wide"><div class="pv-native-head"><div><h2>Detalhes do membro</h2><p>Consulte o cadastro e a situação real nos grupos de WhatsApp.</p></div><a class="pv-native-close" href="#">×</a></div><div class="pv-native-body"><div class="pm-detail-grid" id="membros-pm-detail-data"></div><h3 style="font-size:10px">Grupos vinculados (situação real no WhatsApp)</h3><div class="pm-groups" id="membros-pm-groups-view"><span class="pm-cell">Carregando...</span></div><p class="pm-note" id="membros-pm-groups-note">Esta lista reflete a última sincronização de grupos (a cada 15 minutos) - pode levar alguns minutos para refletir uma movimentação recente.</p><p class="pm-note">Para incluir, remover de um grupo ou retirar da comunidade, use o botão "Ações" no topo da tela - vale tanto para 1 pessoa quanto para várias de uma vez.</p></div><div class="pv-native-actions"><a class="pv-native-secondary" href="#">Fechar</a></div></div></section><section class="pv-native-panel" id="membros-pm-acoes"><div class="pv-native-drawer is-wide"><div class="pv-native-head"><div><h2>Ações</h2><p>Incluir/remover pessoas de um grupo ou retirar da comunidade - vale para 1 pessoa ou para várias de uma vez.</p></div><a class="pv-native-close" href="#" id="membros-pm-acao-close">×</a></div><div class="pv-native-body"><div class="pv-native-field"><label>O que você quer fazer?</label><select id="membros-pm-acao-tipo"><option value="">Selecione</option><option value="INCLUIR_GRUPO">Incluir em um grupo</option><option value="REMOVER_GRUPO">Remover de um grupo</option><option value="RETIRAR_COMUNIDADE">Retirar da comunidade</option></select></div><div class="pv-native-field" id="membros-pm-acao-grupo-wrap" style="display:none"><label id="membros-pm-acao-grupo-label">Grupo</label><select id="membros-pm-acao-grupo"></select></div><p class="pm-note" id="membros-pm-acao-nota" style="display:none">O grupo Avisos não aparece aqui: todo mundo confirmado na comunidade já está nele, e removê-lo de lá é o mesmo que retirar a pessoa da comunidade (use a ação "Retirar da comunidade").</p><div id="membros-pm-acao-picker" style="display:none"><div class="pv-native-field"><label>Buscar pessoa</label><input id="membros-pm-acao-busca" placeholder="Digite para filtrar a lista abaixo"></div><div class="pm-bulk-dropdown-row"><strong id="membros-pm-acao-count">0 selecionado(s)</strong><a href="#" id="membros-pm-acao-select-all">Selecionar todos</a><a href="#" id="membros-pm-acao-select-none">Limpar seleção</a></div><div class="pm-group-list" id="membros-pm-acao-list"></div></div><span class="pa-error" id="membros-pm-bulk-error"></span></div><div class="pv-native-actions"><a class="pv-native-secondary" href="#">Cancelar</a><a href="#" id="membros-pm-acao-submit">Enviar solicitação</a></div></div></section><section class="pv-native-panel" id="membros-pm-naoident"><div class="pv-native-drawer is-wide"><div class="pv-native-head"><div><h2>Números não identificados</h2><p>Pessoas que estão na comunidade real do WhatsApp hoje, mas cujo número não bate com nenhum registro conhecido na relação. Atualizado automaticamente a cada verificação (não é hora real).</p></div><a class="pv-native-close" href="#">×</a></div><div class="pv-native-body"><p class="pm-note" id="membros-pm-naoident-summary">Carregando...</p><div id="membros-pm-naoident-list"></div></div><div class="pv-native-actions"><a class="pv-native-secondary" href="#">Fechar</a></div></div></section><div class="pv-toast" id="membros-pm-toast"><i data-lucide="info" aria-hidden="true"></i><span></span></div>
 </section>
 <script>
 (function(){
@@ -2299,7 +2457,7 @@ html>body{padding:0}
         const busca=acaoBuscaEl.value.trim().toLowerCase();
         const visiveis=acaoElegiveis.filter(function(m){return !busca||(m.name+' '+m.phone).toLowerCase().indexOf(busca)!==-1});
         acaoListEl.innerHTML=visiveis.length?visiveis.map(function(m){
-          return '<label><input type="checkbox" data-acao-id="'+m.id+'" '+(acaoSelecionados.has(m.id)?'checked':'')+'> <span><strong>'+escapeHtml(m.name)+'</strong> · '+escapeHtml(m.statusLabel)+'</span></label>';
+          return '<label><input type="checkbox" data-acao-id="'+m.id+'" '+(acaoSelecionados.has(m.id)?'checked':'')+'> <span><strong>'+escapeHtml(m.name)+'</strong></span></label>';
         }).join(''):'<div style="padding:10px;color:var(--pv-muted);font-size:8.5px">Nenhuma pessoa encontrada.</div>';
       }
       acaoListEl.addEventListener('change',function(e){
@@ -2390,12 +2548,18 @@ html>body{padding:0}
         if(!acaoSelecionados.size){setBulkErro('Selecione ao menos uma pessoa.');return}
         const qtd=acaoSelecionados.size;
         const telefones=Array.from(acaoSelecionados).map(findById).filter(Boolean).map(function(m){return m.phone});
-        if(tipo==='RETIRAR_COMUNIDADE'&&!window.confirm('Retirar '+qtd+' membro(s) da comunidade? Isso remove a pessoa de TODOS os grupos reais de WhatsApp e marca como removida - não é possível desfazer automaticamente.'))return;
-        registrarMovimentacao(tipo,grupoId,telefones,function(){
-          showToast('Pedido registrado para '+qtd+' membro(s). Acompanhe em Processamentos.');
-          resetAcaoPanel();
-          location.hash='';
-        },setBulkErro);
+        const enviarPedido=function(){
+          registrarMovimentacao(tipo,grupoId,telefones,function(){
+            showToast('Pedido registrado para '+qtd+' membro(s). Acompanhe em Processamentos.');
+            resetAcaoPanel();
+            location.hash='';
+          },setBulkErro);
+        };
+        if(tipo==='RETIRAR_COMUNIDADE'){
+          window.asserthConfirmar({titulo:'Retirar da comunidade?',mensagem:'Retirar '+qtd+' membro(s) da comunidade? Isso remove a pessoa de TODOS os grupos reais de WhatsApp e marca como removida - não é possível desfazer automaticamente.',confirmar:'Retirar',perigo:true},enviarPedido);
+          return;
+        }
+        enviarPedido();
       };
       // "Visualizar": puramente informativo (nome + situação atual real nos
       // grupos) - pedido da Ana em 2026-08-28. A lista vem de
@@ -2478,6 +2642,28 @@ html>body{padding:0}
       // mais forte: remove a pessoa de TODOS os grupos reais que ela está E
       // marca status_inclusao='REMOVIDO' - não tem desfazer automático, por
       // isso pede confirmação explícita.
+      // Confirmação dentro do layout (no lugar do window.confirm do navegador).
+      window.asserthConfirmar=function(opcoes,aoConfirmar){
+        const raiz=document.getElementById('asserth-platform-overview')||document.body;
+        const anterior=raiz.querySelector('.pm-confirm');if(anterior)anterior.remove();
+        const wrap=document.createElement('div');
+        wrap.className='pm-confirm';wrap.setAttribute('role','dialog');wrap.setAttribute('aria-modal','true');
+        wrap.innerHTML='<div class="pm-confirm-box"><h3></h3><p></p><div class="pm-confirm-actions"><button type="button" data-no></button><button type="button" data-ok></button></div></div>';
+        wrap.querySelector('h3').textContent=opcoes.titulo||'Confirmar';
+        wrap.querySelector('p').textContent=opcoes.mensagem||'';
+        const no=wrap.querySelector('[data-no]'),ok=wrap.querySelector('[data-ok]');
+        no.textContent=opcoes.cancelar||'Cancelar';
+        ok.textContent=opcoes.confirmar||'Confirmar';
+        ok.className=opcoes.perigo?'is-danger':'is-primary';
+        function fechar(){document.removeEventListener('keydown',tecla);wrap.remove()}
+        function tecla(e){if(e.key==='Escape')fechar()}
+        no.addEventListener('click',fechar);
+        wrap.addEventListener('click',function(e){if(e.target===wrap)fechar()});
+        ok.addEventListener('click',function(){fechar();if(typeof aoConfirmar==='function')aoConfirmar()});
+        document.addEventListener('keydown',tecla);
+        raiz.appendChild(wrap);
+        (opcoes.perigo?no:ok).focus();
+      };
       function registrarMovimentacao(tipo,grupoId,telefones,onOk,onErro){
         const supaClient=window.AsserthSupabase;
         if(!supaClient){onErro('Não foi possível conectar ao serviço. Tente novamente em instantes.');return}
@@ -2491,6 +2677,99 @@ html>body{padding:0}
           onOk();
         }).catch(function(err){console.error('[Membros] falha inesperada ao registrar movimentação:',err);onErro('Não foi possível registrar o pedido. Tente novamente em instantes.')});
       }
+      // "Não identificados" (2026-09-01, pedido da Ana): números da
+      // comunidade real que não batem com nenhum registro conhecido -
+      // persistidos pelo workflow "Atualizar Status Automático" em
+      // comunidades.membros_nao_identificados (substituído por inteiro a
+      // cada execução, sempre a foto mais recente - não é histórico).
+      // "Vincular" grava em comunidades.telefones_alternativos: MANTÉM o
+      // telefone já cadastrado da pessoa (decisão confirmada com a Ana,
+      // via pergunta direta) - só soma um número reconhecido a mais, que
+      // o workflow passa a usar a partir da PRÓXIMA verificação
+      // automática (o vínculo não refaz a reconciliação na hora aqui).
+      let naoIdentificados=[];
+      const naoIdentList=document.getElementById('membros-pm-naoident-list');
+      const naoIdentSummary=document.getElementById('membros-pm-naoident-summary');
+      function renderNaoIdentificados(){
+        if(!naoIdentList)return;
+        naoIdentSummary.textContent=naoIdentificados.length?naoIdentificados.length+' número(s) na comunidade sem registro conhecido.':'Nenhum número sem identificação na última verificação automática.';
+        if(window.AsserthI18n&&typeof window.AsserthI18n.retagAndRefresh==='function')window.AsserthI18n.retagAndRefresh(naoIdentSummary);
+        naoIdentList.innerHTML=naoIdentificados.map(function(n,idx){
+          const rotulo=n.telefone?n.telefone:'LID '+n.lid;
+          return '<div class="pm-naoident-row" data-idx="'+idx+'"><span>'+escapeHtml(rotulo)+'</span><a href="#" data-vincular="'+idx+'">Vincular a uma pessoa</a></div>';
+        }).join('');
+      }
+      function fecharVinculoAberto(){
+        const aberto=naoIdentList.querySelector('.pm-naoident-link-box');
+        if(aberto)aberto.remove();
+      }
+      function abrirVinculo(idx){
+        fecharVinculoAberto();
+        const item=naoIdentificados[idx];
+        const row=naoIdentList.querySelector('.pm-naoident-row[data-idx="'+idx+'"]');
+        if(!item||!row)return;
+        const box=document.createElement('div');
+        box.className='pm-naoident-link-box';
+        box.innerHTML='<input placeholder="Digite o nome da pessoa"><div class="pm-group-list"></div><a href="#" class="pm-naoident-link-cancel">Cancelar</a>';
+        row.insertAdjacentElement('afterend',box);
+        const input=box.querySelector('input'),listEl=box.querySelector('.pm-group-list');
+        function renderResultados(){
+          const q=input.value.trim().toLowerCase();
+          const resultados=q?data.filter(function(m){return (m.name+' '+m.phone).toLowerCase().indexOf(q)!==-1}).slice(0,20):[];
+          listEl.innerHTML=resultados.length?resultados.map(function(m){return '<button type="button" data-pessoa="'+m.id+'"><strong>'+escapeHtml(m.name)+'</strong> · '+escapeHtml(m.phone)+'</button>'}).join(''):(q?'<div style="padding:8px;color:var(--pv-muted);font-size:8px">Ninguém encontrado.</div>':'');
+        }
+        input.addEventListener('input',renderResultados);
+        listEl.addEventListener('click',function(e){
+          const btn=e.target.closest('[data-pessoa]');
+          if(!btn)return;
+          const m=findById(btn.dataset.pessoa);
+          if(m)vincularTelefone(item,m);
+        });
+        box.querySelector('.pm-naoident-link-cancel').addEventListener('click',function(e){e.preventDefault();box.remove()});
+        input.focus();
+      }
+      function vincularTelefone(item,m){
+        window.asserthConfirmar({titulo:'Vincular este número?',mensagem:'Vincular '+(item.telefone||('LID '+item.lid))+' a '+m.name+'? O telefone já cadastrado dela não é substituído - os dois passam a ser reconhecidos como dela.',confirmar:'Vincular'},function(){executarVinculo(item,m)});
+      }
+      function executarVinculo(item,m){
+        const numero=item.telefone||item.lid;
+        const supaClient=window.AsserthSupabase;
+        if(!supaClient){showToast('Não foi possível conectar ao serviço.');return}
+        const tabela=m.id.charAt(0)==='g'?'participantes_permanentes':'participantes';
+        const pessoaId=m.id.slice(2);
+        const usuarioId=(window.AsserthSession&&window.AsserthSession.user&&window.AsserthSession.user.id)||null;
+        supaClient.from('telefones_alternativos').insert({telefone:numero,pessoa_tabela:tabela,pessoa_id:pessoaId,vinculado_por:usuarioId,origem:'Vinculado manualmente a partir da lista de números não identificados.'}).then(function(resposta){
+          if(resposta&&resposta.error){
+            console.error('[Membros] erro ao vincular telefone:',resposta.error);
+            showToast('Não foi possível vincular agora: '+(resposta.error.message||'tente novamente.'));
+            return;
+          }
+          naoIdentificados=naoIdentificados.filter(function(x){return x!==item});
+          renderNaoIdentificados();
+          showToast('Vinculado a '+m.name+'. A relação será atualizada na próxima verificação automática.');
+        }).catch(function(err){
+          console.error('[Membros] falha inesperada ao vincular telefone:',err);
+          showToast('Não foi possível vincular agora. Tente novamente.');
+        });
+      }
+      if(naoIdentList)naoIdentList.addEventListener('click',function(e){
+        const link=e.target.closest('[data-vincular]');
+        if(!link)return;
+        e.preventDefault();
+        abrirVinculo(Number(link.dataset.vincular));
+      });
+      function loadNaoIdentificados(){
+        const supaClient=window.AsserthSupabase;
+        if(!supaClient||!naoIdentSummary)return;
+        naoIdentSummary.textContent='Carregando...';
+        supaClient.from('membros_nao_identificados').select('telefone,lid').order('telefone',{ascending:true}).then(function(resposta){
+          if(resposta&&resposta.error){console.error('[Membros] erro ao carregar não identificados:',resposta.error);naoIdentSummary.textContent='Não foi possível carregar agora.';return}
+          naoIdentificados=(resposta&&resposta.data)||[];
+          renderNaoIdentificados();
+        }).catch(function(err){console.error('[Membros] falha inesperada ao carregar não identificados:',err);naoIdentSummary.textContent='Não foi possível carregar agora.'});
+      }
+      const naoIdentToggle=document.getElementById('membros-pm-naoident-toggle');
+      if(naoIdentToggle)naoIdentToggle.onclick=function(){loadNaoIdentificados()};
       loadGruposAtivos();
       loadData();
     }
@@ -2804,13 +3083,14 @@ html>body{padding:0}
 
   <section class="pv-native-panel" id="comunicados-pv-comm-filter"><div class="pv-native-drawer"><div class="pv-native-head"><div><h2>Filtrar comunicados</h2><p>Combine os critérios necessários e aplique à listagem.</p></div><a class="pv-native-close" href="#">×</a></div><div class="pv-native-body"><form class="pv-native-form"><div class="pv-filter-grid"><div class="pv-native-field"><label>Mês</label><select id="comunicados-pv-filter-month"><option value="">Todos</option><option value="2026-08">Agosto 2026</option><option value="2026-07">Julho 2026</option></select></div><div class="pv-native-field"><label>Status</label><select id="comunicados-pv-filter-status"><option value="">Todos</option><option value="pending">Aguardando aprovação</option><option value="approved">Aprovado</option><option value="scheduled">Agendado</option><option value="sent">Enviado</option><option value="rejected">Reprovado</option></select></div><div class="pv-native-field"><label>Campanha</label><select id="comunicados-pv-filter-campaign"><option value="">Todas</option><option>Integração Agosto 2026</option><option>Benefícios 2026</option><option>Sem campanha</option></select></div><div class="pv-native-field"><label>Grupo</label><select id="comunicados-pv-filter-group"><option value="">Todos os grupos autorizados</option><option>Avisos</option><option>Financeiro</option><option>Departamento Pessoal</option></select></div><div class="pv-native-field"><label>Data inicial</label><input id="comunicados-pv-filter-start" type="date"></div><div class="pv-native-field"><label>Data final</label><input id="comunicados-pv-filter-end" type="date"></div></div></form></div><div class="pv-native-actions"><a class="pv-native-secondary" id="comunicados-pv-clear-filters" href="#">Limpar</a><a id="comunicados-pv-apply-filters" href="#">Aplicar filtros</a></div></div></section>
 
-  <section class="pv-native-panel" id="comunicados-pv-comm-new"><div class="pv-native-drawer is-wide"><div class="pv-native-head"><div><h2>Novo comunicado</h2><p>Cadastre o conteúdo e encaminhe para aprovação.</p></div><a class="pv-native-close" id="comunicados-pv-comm-close" href="#">×</a></div><div class="pv-native-body"><form class="pv-comm-form" id="comunicados-pv-comm-form"><div class="pv-native-field is-full"><label>Nome da comunicação *</label><input id="comunicados-pv-comm-name" placeholder="Ex.: Boas-vindas · Agosto"></div><div class="pv-native-field"><label>Tipo *</label><select id="comunicados-pv-comm-type"><option value="text">Texto</option><option value="image">Imagem</option></select></div><div class="pv-native-field"><label>Campanha</label><select id="comunicados-pv-comm-campaign"><option>Sem campanha</option><option>Integração Agosto 2026</option><option>Benefícios 2026</option></select></div>
+  <section class="pv-native-panel" id="comunicados-pv-comm-new"><div class="pv-native-drawer is-wide"><div class="pv-native-head"><div><h2>Novo comunicado</h2><p>Cadastre o conteúdo e encaminhe para aprovação.</p></div><a class="pv-native-close" id="comunicados-pv-comm-close" href="#">×</a></div><div class="pv-native-body"><form class="pv-comm-form" id="comunicados-pv-comm-form"><div class="pv-native-field is-full"><label>Nome da comunicação *</label><input id="comunicados-pv-comm-name" placeholder="Ex.: Boas-vindas · Agosto"></div><div class="pv-native-field"><label>Tipo *</label><select id="comunicados-pv-comm-type"><option value="text">Texto</option><option value="image">Imagem</option><option value="video">Vídeo</option></select></div><div class="pv-native-field"><label>Campanha</label><select id="comunicados-pv-comm-campaign"><option>Sem campanha</option><option>Integração Agosto 2026</option><option>Benefícios 2026</option></select></div>
 <div class="pv-native-field is-full pv-image-fields" id="comunicados-pv-image-fields" hidden><label>Imagem do comunicado *</label><div class="pv-upload"><input id="comunicados-pv-image-file" type="file" accept="image/png,image/jpeg,image/webp"><label class="pv-upload-label" for="comunicados-pv-image-file">Selecionar imagem</label><span class="pv-upload-name" id="comunicados-pv-upload-name">Nenhum arquivo selecionado</span></div><p class="pv-help-text">PNG, JPG ou WEBP. O arquivo será tratado, hospedado e vinculado automaticamente.</p></div>
+<div class="pv-native-field is-full pv-image-fields" id="comunicados-pv-video-fields" hidden><label>Vídeo do comunicado *</label><div class="pv-upload"><input id="comunicados-pv-video-file" type="file" accept="video/mp4,.mp4"><label class="pv-upload-label" for="comunicados-pv-video-file">Selecionar vídeo</label><span class="pv-upload-name" id="comunicados-pv-video-name">Nenhum arquivo selecionado</span></div><p class="pv-help-text">MP4 (H.264) de até 16 MB. O arquivo será hospedado e enviado ao grupo automaticamente.</p></div>
 <div class="pv-native-field is-full"><label id="comunicados-pv-message-label">Mensagem *</label><div class="pv-editor"><div class="pv-editor-toolbar"><button type="button" data-format="bold"><b>B</b></button><button type="button" data-format="italic"><i>I</i></button><button type="button" data-format="strike"><s>S</s></button><button type="button" data-format="list">• Lista</button><button type="button" id="comunicados-pv-emoji" aria-label="Selecionar emoji">😊</button><div class="pv-emoji-menu" id="comunicados-pv-emoji-menu"></div></div><textarea id="comunicados-pv-message" placeholder="Digite a mensagem que será enviada aos grupos selecionados..."></textarea><div class="pv-editor-meta"><span id="comunicados-pv-message-rule">Obrigatória · máximo de 4.096 caracteres</span><span id="comunicados-pv-char-count">0 / 4096</span></div></div></div>
 <div class="pv-native-field"><label>Data do disparo *</label><div class="pv-date-picker" id="comunicados-pv-send-picker"><input id="comunicados-pv-send-date" type="hidden"><button class="pv-date-trigger" id="comunicados-pv-send-date-trigger" type="button"><span>Selecione uma data</span><i data-lucide="calendar-days"></i></button><div class="pv-calendar" id="comunicados-pv-send-calendar"></div></div></div><div class="pv-native-field"><label>Hora do disparo *</label><input id="comunicados-pv-send-time" type="time"></div><div class="pv-native-field"><label>Recorrência</label><select id="comunicados-pv-recurrence"><option value="once">Envio único</option><option value="daily">Todos os dias · segunda a sexta</option><option value="weekly">Uma vez por semana · mesmo dia</option><option value="biweekly">A cada 15 dias · mesmo dia da semana</option><option value="monthly">Primeiro dia útil do mês</option><option value="lastBusiness">Último dia útil do mês</option></select></div><div class="pv-native-field pv-recurrence-end" id="comunicados-pv-recurrence-end" hidden><label>Repetir até *</label><div class="pv-date-picker" id="comunicados-pv-until-picker"><input id="comunicados-pv-recurrence-until" type="hidden"><button class="pv-date-trigger" id="comunicados-pv-until-date-trigger" type="button"><span>Selecione uma data</span><i data-lucide="calendar-days"></i></button><div class="pv-calendar" id="comunicados-pv-until-calendar"></div></div></div><p class="pv-recurrence-note" id="comunicados-pv-recurrence-note">Este comunicado será enviado uma única vez.</p><div class="pv-form-error is-full" id="comunicados-pv-schedule-error"></div>
 <div class="pv-native-field is-full"><label>Grupos de destino *</label><div class="pv-group-picker" id="comunicados-pv-group-picker"><div class="pv-group-control" id="comunicados-pv-group-control"></div><div class="pv-group-menu" id="comunicados-pv-group-menu"><label><input type="checkbox" value="Avisos" checked>Avisos</label><label><input type="checkbox" value="Departamento Pessoal">Departamento Pessoal</label><label><input type="checkbox" value="Recrutamento e Seleção">Recrutamento e Seleção</label><label><input type="checkbox" value="Financeiro">Financeiro</label><label><input type="checkbox" value="Comercial">Comercial</label><label><input type="checkbox" value="Tecnologia">Tecnologia</label><label><input type="checkbox" value="Diretoria">Diretoria</label><label><input type="checkbox" value="Gerência">Gerência</label><label><input type="checkbox" value="Colaboradores">Colaboradores</label><label><input type="checkbox" value="Prestadores">Prestadores</label></div></div></div><div class="pv-native-field is-full"><label>Observação</label><textarea class="pv-message-box" style="min-height:70px" placeholder="Informação interna opcional. Não será enviada no WhatsApp."></textarea></div></form></div><div class="pv-native-actions"><a class="pv-native-secondary" id="comunicados-pv-comm-cancel" href="#">Cancelar</a><a class="pv-native-secondary" id="comunicados-pv-preview-action" href="#comunicados-pv-comm-preview">Visualizar</a><a id="comunicados-pv-register-action" href="#">Cadastrar comunicado</a></div></div></section>
 
-  <section class="pv-native-panel" id="comunicados-pv-comm-preview"><div class="pv-native-drawer"><div class="pv-native-head"><div><h2>Prévia no WhatsApp</h2></div><a class="pv-native-close" id="comunicados-pv-preview-close" href="#">×</a></div><div class="pv-native-body"><div class="pv-whatsapp"><div class="pv-wa-body"><div class="pv-wa-bubble"><img class="pv-wa-image" id="comunicados-pv-wa-image" alt="Imagem do comunicado"><div id="comunicados-pv-wa-message"></div><div class="pv-wa-time" id="comunicados-pv-wa-time">09:00 ✓✓</div></div></div></div></div><div class="pv-native-actions"><a id="comunicados-pv-preview-back" href="#">Fechar</a></div></div></section>
+  <section class="pv-native-panel" id="comunicados-pv-comm-preview"><div class="pv-native-drawer"><div class="pv-native-head"><div><h2>Prévia no WhatsApp</h2></div><a class="pv-native-close" id="comunicados-pv-preview-close" href="#">×</a></div><div class="pv-native-body"><div class="pv-whatsapp"><div class="pv-wa-body"><div class="pv-wa-bubble"><img class="pv-wa-image" id="comunicados-pv-wa-image" alt="Imagem do comunicado"><video class="pv-wa-image" id="comunicados-pv-wa-video" controls playsinline preload="metadata"></video><div id="comunicados-pv-wa-message"></div><div class="pv-wa-time" id="comunicados-pv-wa-time">09:00 ✓✓</div></div></div></div><p class="pm-note" id="comunicados-pv-preview-decision" hidden></p></div><div class="pv-native-actions"><a id="comunicados-pv-preview-back" href="#">Fechar</a></div></div></section>
 </section>
 <script>
 (function(){
@@ -2840,6 +3120,42 @@ html>body{padding:0}
       }
       function brDate(value){const p=value.split('-');return p[2]+'/'+p[1]+'/'+p[0]}
       function escapeHtml(value){return String(value==null?'':value).replace(/[&<>]/g,function(char){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[char]})}
+      // "Aprovado por" na prévia (2026-08-31): mesmo mecanismo já usado em
+      // Aprovações (nomes_usuarios(uuid[])) - aqui só precisa resolver
+      // quem decidiu (aprovou/reprovou), não quem criou (não pedido nesta
+      // tela). `lastPreviewRecord` guarda o registro mostrado na prévia no
+      // momento, pra atualizar o texto se o nome chegar depois de aberta.
+      const userNames={};
+      const UUID_RE=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+      let lastPreviewRecord=null;
+      function resolveDecisionNames(rows){
+        const supaClient=window.AsserthSupabase;
+        if(!supaClient)return Promise.resolve();
+        const ids=[...new Set(rows.map(r=>r.decidedById).filter(id=>id&&UUID_RE.test(id)&&!userNames[id]))];
+        if(!ids.length)return Promise.resolve();
+        return supaClient.rpc('nomes_usuarios',{p_ids:ids}).then(function(resposta){
+          if(resposta&&resposta.error){console.error('[Comunicados] erro ao resolver nome de quem decidiu:',resposta.error);return}
+          (resposta&&resposta.data||[]).forEach(function(u){if(u&&u.id)userNames[u.id]=u.nome||userNames[u.id]});
+        }).catch(function(err){console.error('[Comunicados] falha inesperada ao resolver nome de quem decidiu:',err)});
+      }
+      function applyDecisionNames(rows){
+        rows.forEach(function(r){if(r.decidedById&&userNames[r.decidedById])r.decidedBy=userNames[r.decidedById]});
+      }
+      function renderPreviewDecision(record){
+        const el=document.getElementById('comunicados-pv-preview-decision');
+        if(!el)return;
+        if(record&&record.decidedById){
+          const nome=userNames[record.decidedById]||record.decidedById;
+          const quando=record.decidedAt?new Date(record.decidedAt).toLocaleString('pt-BR'):'';
+          const acao=record.status==='rejected'?'Reprovado':'Aprovado';
+          el.textContent=acao+' por '+nome+(quando?' em '+quando:'')+(record.status==='rejected'&&record.reason?' · Motivo: '+record.reason:'');
+          el.hidden=false;
+        }else{
+          el.textContent='';
+          el.hidden=true;
+        }
+        if(window.AsserthI18n&&typeof window.AsserthI18n.retagAndRefresh==='function')window.AsserthI18n.retagAndRefresh(el);
+      }
       // Status reais do fluxo (n8n + aba Aprovações): um comunicado nasce
       // AGUARDANDO_APROVACAO; ao ser aprovado vira PENDENTE (agendado,
       // aguardando o disparo do workflow "Disparo de Comunicados"); depois
@@ -2896,9 +3212,15 @@ html>body{padding:0}
           date:parts.date,
           time:parts.time,
           status:mapStatus(row.status),
-          type:/imag/i.test(row.tipo||'')?'image':'text',
+          type:/v[ií]deo/i.test(row.tipo||'')?'video':/imag/i.test(row.tipo||'')?'image':'text',
           message:row.mensagem||'',
-          image:row.url_imagem||''
+          image:row.url_imagem||'',
+          // "Aprovado por" (2026-08-31) - ver resolveDecisionNames/
+          // applyDecisionNames/renderPreviewDecision acima.
+          decidedById:row.aprovado_por||row.rejeitado_por||null,
+          decidedAt:row.aprovado_em||row.rejeitado_em||null,
+          decidedBy:(function(){const id=row.aprovado_por||row.rejeitado_por;return (id&&userNames[id])||''})(),
+          reason:row.motivo_rejeicao||''
         };
       }
       function loadRecords(){
@@ -2919,6 +3241,15 @@ html>body{padding:0}
           filtered=records.slice();
           currentPage=1;
           render();
+          return resolveDecisionNames(records).then(function(){
+            applyDecisionNames(records);
+            // Se a prévia estiver aberta mostrando um desses registros,
+            // atualiza o texto de "aprovado/reprovado por" sem fechar nada.
+            if(lastPreviewRecord){
+              const atualizado=records.find(function(item){return item.id===lastPreviewRecord.id});
+              if(atualizado){lastPreviewRecord=atualizado;renderPreviewDecision(atualizado)}
+            }
+          });
         }).catch(function(err){
           console.error('[Comunicados] falha inesperada ao carregar comunicados:',err);
           showToast('Não foi possível carregar os comunicados agora. Tente novamente em instantes.');
@@ -2942,6 +3273,7 @@ html>body{padding:0}
       const type=document.getElementById('comunicados-pv-comm-type'),imageFields=document.getElementById('comunicados-pv-image-fields'),message=document.getElementById('comunicados-pv-message'),label=document.getElementById('comunicados-pv-message-label'),rule=document.getElementById('comunicados-pv-message-rule'),count=document.getElementById('comunicados-pv-char-count');
       const sendDate=document.getElementById('comunicados-pv-send-date'),sendTime=document.getElementById('comunicados-pv-send-time'),scheduleError=document.getElementById('comunicados-pv-schedule-error');
       const imageFile=document.getElementById('comunicados-pv-image-file'),uploadName=document.getElementById('comunicados-pv-upload-name'),picker=document.getElementById('comunicados-pv-group-picker'),control=document.getElementById('comunicados-pv-group-control'),groupMenu=document.getElementById('comunicados-pv-group-menu'),recurrence=document.getElementById('comunicados-pv-recurrence'),recurrenceEnd=document.getElementById('comunicados-pv-recurrence-end'),recurrenceUntil=document.getElementById('comunicados-pv-recurrence-until'),recurrenceNote=document.getElementById('comunicados-pv-recurrence-note');
+      const videoFields=document.getElementById('comunicados-pv-video-fields'),videoFile=document.getElementById('comunicados-pv-video-file'),videoName=document.getElementById('comunicados-pv-video-name'),VIDEO_MAX_MB=16;
       let checks=Array.from(groupMenu.querySelectorAll('input'));
       // grupoIdPorNome: preenchido só se a tabela real de grupos (ver
       // tentativaCarregarGruposReais abaixo) existir e tiver linhas. Sem
@@ -2974,11 +3306,11 @@ html>body{padding:0}
       }
       const sendCalendar=createCalendar({picker:'comunicados-pv-send-picker',input:'comunicados-pv-send-date',trigger:'comunicados-pv-send-date-trigger',calendar:'comunicados-pv-send-calendar',min:function(){return iso(new Date())}}),untilCalendar=createCalendar({picker:'comunicados-pv-until-picker',input:'comunicados-pv-recurrence-until',trigger:'comunicados-pv-until-date-trigger',calendar:'comunicados-pv-until-calendar',min:function(){return sendDate.value?tomorrowOf(sendDate.value):iso(new Date())}});
       document.addEventListener('click',function(e){if(!e.target.closest('.pv-date-picker'))document.querySelectorAll('.pv-date-picker.is-open').forEach(function(p){p.classList.remove('is-open')})});
-      function updateType(){const image=type.value==='image',limit=image?1024:4096;imageFields.hidden=!image;label.textContent=image?'Legenda':'Mensagem *';rule.textContent=image?'Opcional · até 1.024 caracteres':'Mensagem obrigatória · até 4.096 caracteres';if(window.AsserthI18n&&typeof window.AsserthI18n.retagAndRefresh==='function')window.AsserthI18n.retagAndRefresh([label,rule]);message.maxLength=limit;if(message.value.length>limit)message.value=message.value.slice(0,limit);count.textContent=message.value.length+' / '+limit;validate()}
+      function updateType(){const image=type.value==='image',video=type.value==='video',media=image||video,limit=media?1024:4096;imageFields.hidden=!image;videoFields.hidden=!video;label.textContent=media?'Legenda':'Mensagem *';rule.textContent=media?'Opcional · até 1.024 caracteres':'Mensagem obrigatória · até 4.096 caracteres';if(window.AsserthI18n&&typeof window.AsserthI18n.retagAndRefresh==='function')window.AsserthI18n.retagAndRefresh([label,rule]);message.maxLength=limit;if(message.value.length>limit)message.value=message.value.slice(0,limit);count.textContent=message.value.length+' / '+limit;validate()}
       function weekday(value){if(!value)return false;const d=new Date(value+'T12:00:00').getDay();return d!==0&&d!==6}
       function validate(){const chosen=new Date(sendDate.value+'T'+(sendTime.value||'00:00')),nowPlus=new Date(Date.now()+5*60000);let text='';if(!sendDate.value||!sendTime.value)text='Informe a data e o horário do disparo.';else if(!weekday(sendDate.value))text='Disparos não podem ser agendados aos finais de semana.';else if(chosen<nowPlus)text='Escolha um horário com pelo menos 5 minutos de antecedência.';else if(recurrence.value!=='once'&&!recurrenceUntil.value)text='Informe a data final da recorrência.';else if(recurrence.value!=='once'&&!weekday(recurrenceUntil.value))text='A data final também deve ser um dia útil.';else if(recurrence.value!=='once'&&recurrenceUntil.value<=sendDate.value)text='A data final deve ser posterior ao primeiro disparo.';scheduleError.textContent=text;if(window.AsserthI18n&&typeof window.AsserthI18n.retagAndRefresh==='function')window.AsserthI18n.retagAndRefresh(scheduleError);return !text}
       function updateRecurrence(){const recurring=recurrence.value!=='once',labels={daily:'Envio em todos os dias, de segunda a sexta-feira, até a data final.',weekly:'Envio uma vez por semana, sempre no mesmo dia da semana e horário escolhidos.',biweekly:'Envio a cada 15 dias, preservando o mesmo dia da semana e horário.',monthly:'Envio no primeiro dia útil de cada mês.',lastBusiness:'Envio no último dia útil de cada mês.'};recurrenceEnd.hidden=!recurring;recurrenceUntil.required=recurring;recurrenceNote.textContent=recurring?labels[recurrence.value]:'Este comunicado será enviado uma única vez.';if(window.AsserthI18n&&typeof window.AsserthI18n.retagAndRefresh==='function')window.AsserthI18n.retagAndRefresh(recurrenceNote);validate()}
-      type.addEventListener('change',updateType);message.addEventListener('input',updateType);sendDate.addEventListener('change',function(){untilCalendar.refresh();validate()});sendTime.addEventListener('change',validate);recurrence.addEventListener('change',updateRecurrence);recurrenceUntil.addEventListener('change',validate);imageFile.addEventListener('change',function(){uploadName.textContent=imageFile.files&&imageFile.files[0]?imageFile.files[0].name:'Nenhum arquivo selecionado'});updateType();updateRecurrence();
+      type.addEventListener('change',updateType);message.addEventListener('input',updateType);sendDate.addEventListener('change',function(){untilCalendar.refresh();validate()});sendTime.addEventListener('change',validate);recurrence.addEventListener('change',updateRecurrence);recurrenceUntil.addEventListener('change',validate);imageFile.addEventListener('change',function(){uploadName.textContent=imageFile.files&&imageFile.files[0]?imageFile.files[0].name:'Nenhum arquivo selecionado'});videoFile.addEventListener('change',function(){const f=videoFile.files&&videoFile.files[0];if(f&&(!/\.mp4$/i.test(f.name)||(f.type&&f.type!=='video/mp4'))){videoFile.value='';videoName.textContent='Nenhum arquivo selecionado';scheduleError.style.color='#b42332';scheduleError.textContent='Use um vídeo no formato MP4.';return}if(f&&f.size>VIDEO_MAX_MB*1024*1024){videoFile.value='';videoName.textContent='Nenhum arquivo selecionado';scheduleError.style.color='#b42332';scheduleError.textContent='O vídeo tem '+(f.size/1048576).toFixed(1).replace('.',',')+' MB. O limite é de '+VIDEO_MAX_MB+' MB (limite do WhatsApp). Comprima o vídeo e tente novamente.';return}videoName.textContent=f?f.name+' · '+(f.size/1048576).toFixed(1).replace('.',',')+' MB':'Nenhum arquivo selecionado';scheduleError.textContent=''});updateType();updateRecurrence();
       function wrap(prefix,suffix){const start=message.selectionStart,end=message.selectionEnd,raw=message.value.slice(start,end)||'texto',lead=(raw.match(/^\s*/)||[''])[0],trail=(raw.match(/\s*$/)||[''])[0],core=raw.slice(lead.length,raw.length-trail.length)||'texto';message.setRangeText(lead+prefix+core+suffix+trail,start,end,'select');message.focus();message.dispatchEvent(new Event('input'))}
       document.querySelectorAll('[data-format]').forEach(function(button){button.addEventListener('click',function(){const f=button.dataset.format;if(f==='bold')wrap('*','*');if(f==='italic')wrap('_','_');if(f==='strike')wrap('~','~');if(f==='list'){const start=message.selectionStart,end=message.selectionEnd,raw=message.value.slice(start,end)||'texto',listed=raw.split('\n').map(function(line){return line.startsWith('• ')?line:'• '+line}).join('\n');message.setRangeText(listed,start,end,'select');message.focus();message.dispatchEvent(new Event('input'))}})});
       const emojiButton=document.getElementById('comunicados-pv-emoji'),emojiMenu=document.getElementById('comunicados-pv-emoji-menu'),emojis=['👋','😊','😀','😍','🤩','😉','👍','👏','🙏','💪','🎉','🌟','✨','📢','🔔','⚠️','✅','❌','📌','📅','⏰','💡','❤️','💚','🚀','💼','📊','🔗','👉','👀','📞','🎯','🎁'];
@@ -3056,9 +3388,9 @@ html>body{padding:0}
           }).catch(function(err){console.error('[Comunicados] não foi possível carregar campanhas reais (mantendo seletor padrão):',err)});
         }catch(err){console.error('[Comunicados] tentativa de carregar campanhas reais falhou (mantendo seletor padrão):',err)}
       })();
-      function showPreview(value,time,imageSource){document.getElementById('comunicados-pv-wa-message').innerHTML=formatted(value);document.getElementById('comunicados-pv-wa-time').textContent=(time||'09:00')+' ✓✓';const img=document.getElementById('comunicados-pv-wa-image');if(objectUrl){URL.revokeObjectURL(objectUrl);objectUrl=''}let src=imageSource||'';if(!src&&type.value==='image'&&imageFile.files&&imageFile.files[0]){objectUrl=URL.createObjectURL(imageFile.files[0]);src=objectUrl}if(src){img.src=src;img.style.display='block'}else{img.removeAttribute('src');img.style.display='none'}}
+      function showPreview(value,time,imageSource,record){document.getElementById('comunicados-pv-wa-message').innerHTML=formatted(value);document.getElementById('comunicados-pv-wa-time').textContent=(time||'09:00')+' ✓✓';const img=document.getElementById('comunicados-pv-wa-image'),vid=document.getElementById('comunicados-pv-wa-video');if(objectUrl){URL.revokeObjectURL(objectUrl);objectUrl=''}const isVideo=record?record.type==='video':type.value==='video';let src=imageSource||'';if(!src&&!record){const f=type.value==='image'?(imageFile.files&&imageFile.files[0]):type.value==='video'?(videoFile.files&&videoFile.files[0]):null;if(f){objectUrl=URL.createObjectURL(f);src=objectUrl}}img.removeAttribute('src');img.style.display='none';try{vid.pause()}catch(e){}vid.removeAttribute('src');vid.style.display='none';if(src){const el=isVideo?vid:img;el.src=src;el.style.display='block'}lastPreviewRecord=record||null;renderPreviewDecision(record)}
       document.getElementById('comunicados-pv-preview-action').addEventListener('click',function(){previewOrigin='form';showPreview(message.value,sendTime.value,'')});
-      list.addEventListener('click',function(e){const link=e.target.closest('[data-record]');if(!link)return;const r=records.find(function(item){return item.id===Number(link.dataset.record)});if(r){previewOrigin='list';showPreview(r.message,r.time,r.image||'')}});
+      list.addEventListener('click',function(e){const link=e.target.closest('[data-record]');if(!link)return;const r=records.find(function(item){return item.id===Number(link.dataset.record)});if(r){previewOrigin='list';showPreview(r.message,r.time,r.image||'',r)}});
       function closePreview(e){e.preventDefault();location.hash=previewOrigin==='form'?'comunicados-pv-comm-new':''}
       document.getElementById('comunicados-pv-preview-close').addEventListener('click',closePreview);document.getElementById('comunicados-pv-preview-back').addEventListener('click',closePreview);
       // Limpa o formulário de "Novo comunicado" depois de um cadastro bem
@@ -3068,6 +3400,7 @@ html>body{padding:0}
       function resetForm(){
         nameField.value='';
         message.value='';
+        videoFile.value='';videoName.textContent='Nenhum arquivo selecionado';
         updateType();
         if(observacaoBox)observacaoBox.value='';
         if(campaignSelect)campaignSelect.value='Sem campanha';
@@ -3098,9 +3431,9 @@ html>body{padding:0}
       document.getElementById('comunicados-pv-register-action').addEventListener('click',async function(event){
         event.preventDefault();
         scheduleError.style.color='#b42332';
-        const imageOk=type.value!=='image'||(imageFile.files&&imageFile.files.length),messageOk=type.value==='image'||message.value.trim(),groupsOk=selectedGroups().length>0;
+        const imageOk=type.value==='image'?!!(imageFile.files&&imageFile.files.length):type.value==='video'?!!(videoFile.files&&videoFile.files.length):true,messageOk=type.value!=='text'||message.value.trim(),groupsOk=selectedGroups().length>0;
         if(!validate()||!imageOk||!messageOk||!groupsOk){
-          scheduleError.textContent=scheduleError.textContent||(!imageOk?'Selecione o arquivo da imagem.':!messageOk?'A mensagem é obrigatória para comunicados de texto.':'Selecione ao menos um grupo de destino.');
+          scheduleError.textContent=scheduleError.textContent||(!imageOk?(type.value==='video'?'Selecione o arquivo do vídeo.':'Selecione o arquivo da imagem.'):!messageOk?'A mensagem é obrigatória para comunicados de texto.':'Selecione ao menos um grupo de destino.');
           if(window.AsserthI18n&&typeof window.AsserthI18n.retagAndRefresh==='function')window.AsserthI18n.retagAndRefresh(scheduleError);
           return;
         }
@@ -3122,7 +3455,7 @@ html>body{padding:0}
         const agora=new Date();
         const codigo='COM-'+agora.getFullYear()+String(agora.getMonth()+1).padStart(2,'0')+String(agora.getDate()).padStart(2,'0')+'-'+Date.now().toString().slice(-6);
         const nome=(document.getElementById('comunicados-pv-comm-name').value||'').trim();
-        const tipo=type.value==='image'?'imagem':'texto';
+        const tipo=type.value==='image'?'imagem':type.value==='video'?'video':'texto';
         const observacaoField=document.querySelector('#comunicados-pv-comm-form .pv-message-box');
         const observacao=observacaoField&&observacaoField.value.trim()?observacaoField.value.trim():null;
         // Assume fuso horário fixo de Brasília (-03:00, sem horário de
@@ -3152,7 +3485,7 @@ html>body{padding:0}
         const registerLink=event.currentTarget;
         registerLink.style.pointerEvents='none';
         scheduleError.style.color='var(--pv-muted)';
-        scheduleError.textContent=tipo==='imagem'?'Enviando imagem...':'Enviando comunicado para aprovação...';
+        scheduleError.textContent=tipo==='imagem'?'Enviando imagem...':tipo==='video'?'Enviando vídeo... pode levar alguns instantes.':'Enviando comunicado para aprovação...';
         if(window.AsserthI18n&&typeof window.AsserthI18n.retagAndRefresh==='function')window.AsserthI18n.retagAndRefresh(scheduleError);
         // Upload da imagem para o Supabase Storage (bucket público
         // "comunicados-imagens" - ver supabase_migration_storage.sql):
@@ -3199,6 +3532,26 @@ html>body{padding:0}
           scheduleError.style.color='var(--pv-muted)';
           scheduleError.textContent='Enviando comunicado para aprovação...';
           if(window.AsserthI18n&&typeof window.AsserthI18n.retagAndRefresh==='function')window.AsserthI18n.retagAndRefresh(scheduleError);
+        }
+        // Vídeo (23/10/2026): sobe o MP4 para o bucket público
+        // "comunicados-videos" (ver supabase_video_comunicados_23-10.sql) e
+        // grava a URL em `url_imagem` (mesma coluna da imagem: o fluxo de
+        // Disparo escolhe o endpoint da Z-API pelo campo `tipo`).
+        if(tipo==='video'){
+          const arquivoV=videoFile.files&&videoFile.files[0];
+          const falhaV=function(msg){registerLink.style.pointerEvents='';scheduleError.style.color='#b42332';scheduleError.textContent=msg;if(window.AsserthI18n&&typeof window.AsserthI18n.retagAndRefresh==='function')window.AsserthI18n.retagAndRefresh(scheduleError)};
+          if(!arquivoV){falhaV('Selecione o arquivo do vídeo.');return}
+          if(arquivoV.size>VIDEO_MAX_MB*1024*1024){falhaV('O vídeo passa de '+VIDEO_MAX_MB+' MB. Comprima e tente novamente.');return}
+          const caminhoV=codigo+'/'+Date.now()+'.mp4';
+          try{
+            const upV=await supaClient.storage.from('comunicados-videos').upload(caminhoV,arquivoV,{contentType:'video/mp4',upsert:false});
+            if(upV&&upV.error){console.error('[Comunicados] erro ao subir vídeo:',upV.error);falhaV('Não foi possível enviar o vídeo: '+(upV.error.message||'tente novamente.'));return}
+            const pubV=supaClient.storage.from('comunicados-videos').getPublicUrl(caminhoV);
+            urlImagem=pubV&&pubV.data&&pubV.data.publicUrl||null;
+          }catch(errV){console.error('[Comunicados] falha inesperada ao subir vídeo:',errV);falhaV('Não foi possível enviar o vídeo. Tente novamente.');return}
+          if(!urlImagem){falhaV('Não foi possível gerar o link do vídeo. Tente novamente.');return}
+          scheduleError.style.color='var(--pv-muted)';
+          scheduleError.textContent='Enviando comunicado para aprovação...';
         }
         // Recorrência (2026-08-26): esta tela só cria a 1ª ocorrência da
         // série, do mesmo jeito que já criava antes (1 linha por grupo,
@@ -3543,7 +3896,7 @@ html>body{padding:0}
       <div class="pv-metrics"><div class="pv-metric is-attention"><span>Aguardando aprovação</span><strong id="aprovacoes-pa-count-pending">0</strong><small>requerem decisão</small></div><div class="pv-metric"><span>Aprovados</span><strong id="aprovacoes-pa-count-approved">0</strong><small>no resultado filtrado</small></div><div class="pv-metric"><span>Reprovados</span><strong id="aprovacoes-pa-count-rejected">0</strong><small>no resultado filtrado</small></div><div class="pv-metric"><span>Próximo agendamento</span><strong id="aprovacoes-pa-next-time">—</strong><small id="aprovacoes-pa-next-date">sem pendências</small></div></div>
       <section class="pv-section"><div class="pv-comm-toolbar"><div><h2>Comunicados para decisão</h2><p>Uma aprovação ou reprovação encerra a análise. O conteúdo não pode ser editado.</p></div><span class="pv-comm-cell" id="aprovacoes-pa-result-label">0 registros</span></div><div class="pv-comm-list" id="aprovacoes-pa-list"></div><div class="pv-pagination"><span id="aprovacoes-pa-page-summary">0 registros</span><div class="pv-page-buttons" id="aprovacoes-pa-pages"></div></div></section>
       <section class="pv-native-panel" id="aprovacoes-pa-filter"><div class="pv-native-drawer"><div class="pv-native-head"><div><h2>Filtrar aprovações</h2><p>Os resultados respeitam as áreas e grupos autorizados para o seu acesso.</p></div><a class="pv-native-close" href="#">×</a></div><div class="pv-native-body"><div class="aprovacoes-pa-filter-grid"><div class="pv-native-field"><label>Status</label><select id="aprovacoes-pa-filter-status"><option value="">Todos</option><option value="pending">Aguardando aprovação</option><option value="approved">Aprovado</option><option value="rejected">Reprovado</option></select></div><div class="pv-native-field"><label>Grupo</label><select id="aprovacoes-pa-filter-group"><option value="">Todos os grupos autorizados</option><option>Avisos</option><option>Financeiro</option><option>Departamento Pessoal</option><option>Tecnologia</option></select></div><div class="pv-native-field"><label>Campanha</label><select id="aprovacoes-pa-filter-campaign"><option value="">Todas</option><option>Integração Agosto 2026</option><option>Benefícios 2026</option><option>Sem campanha</option></select></div><div class="pv-native-field"><label>Criado por</label><input id="aprovacoes-pa-filter-author" placeholder="Digite o nome"></div></div></div><div class="pv-native-actions"><a class="pv-native-secondary" id="aprovacoes-pa-clear" href="#">Limpar</a><a id="aprovacoes-pa-apply" href="#">Aplicar filtros</a></div></div></section>
-      <section class="pv-native-panel" id="aprovacoes-pa-review"><div class="pv-native-drawer is-wide"><div class="pv-native-head"><div><h2>Revisar comunicado</h2><p>Confira o conteúdo exatamente como será enviado antes de decidir.</p></div><a class="pv-native-close" href="#">×</a></div><div class="pv-native-body"><div class="pa-review-summary"><div class="pa-review-line"><div class="pa-review-item"><span>Comunicação</span><strong id="aprovacoes-pa-review-title"></strong></div><div class="pa-review-item"><span>Criado por</span><strong id="aprovacoes-pa-review-author"></strong></div></div><div class="pa-review-line"><div class="pa-review-item"><span>Grupo e campanha</span><strong id="aprovacoes-pa-review-context"></strong></div><div class="pa-review-item"><span>Disparo programado</span><strong id="aprovacoes-pa-review-schedule"></strong></div></div></div><div class="pa-note" id="aprovacoes-pa-review-recurrence" hidden></div><div class="pa-preview-label"><strong>Prévia da mensagem</strong><span>Visualização no WhatsApp</span></div><div class="pv-whatsapp"><div class="pv-wa-body"><div class="pv-wa-bubble"><img class="pv-wa-image" id="aprovacoes-pa-review-image" alt="Imagem do comunicado"><div id="aprovacoes-pa-review-message"></div><div class="pv-wa-time" id="aprovacoes-pa-review-time"></div></div></div></div><div class="aprovacoes-pa-audit" id="aprovacoes-pa-review-audit" hidden></div></div><div class="pa-decision-actions" id="aprovacoes-pa-review-actions"><button type="button" class="reject" id="aprovacoes-pa-reject-open">Reprovar</button><button type="button" class="approve" id="aprovacoes-pa-approve">Aprovar comunicado</button></div></div></section>
+      <section class="pv-native-panel" id="aprovacoes-pa-review"><div class="pv-native-drawer is-wide"><div class="pv-native-head"><div><h2>Revisar comunicado</h2><p>Confira o conteúdo exatamente como será enviado antes de decidir.</p></div><a class="pv-native-close" href="#">×</a></div><div class="pv-native-body"><div class="pa-review-summary"><div class="pa-review-line"><div class="pa-review-item"><span>Comunicação</span><strong id="aprovacoes-pa-review-title"></strong></div><div class="pa-review-item"><span>Criado por</span><strong id="aprovacoes-pa-review-author"></strong></div></div><div class="pa-review-line"><div class="pa-review-item"><span>Grupo e campanha</span><strong id="aprovacoes-pa-review-context"></strong></div><div class="pa-review-item"><span>Disparo programado</span><strong id="aprovacoes-pa-review-schedule"></strong></div></div></div><div class="pa-note" id="aprovacoes-pa-review-recurrence" hidden></div><div class="pa-preview-label"><strong>Prévia da mensagem</strong><span>Visualização no WhatsApp</span></div><div class="pv-whatsapp"><div class="pv-wa-body"><div class="pv-wa-bubble"><img class="pv-wa-image" id="aprovacoes-pa-review-image" alt="Imagem do comunicado"><video class="pv-wa-image" id="aprovacoes-pa-review-video" controls playsinline preload="metadata"></video><div id="aprovacoes-pa-review-message"></div><div class="pv-wa-time" id="aprovacoes-pa-review-time"></div></div></div></div><div class="aprovacoes-pa-audit" id="aprovacoes-pa-review-audit" hidden></div></div><div class="pa-decision-actions" id="aprovacoes-pa-review-actions"><button type="button" class="reject" id="aprovacoes-pa-reject-open">Reprovar</button><button type="button" class="approve" id="aprovacoes-pa-approve">Aprovar comunicado</button></div></div></section>
       <section class="pv-native-panel" id="aprovacoes-pa-reject"><div class="pv-native-drawer"><div class="pv-native-head"><div><h2>Reprovar comunicado</h2><p>A justificativa será registrada e encaminhada ao responsável pela criação.</p></div><a class="pv-native-close" href="#aprovacoes-pa-review">×</a></div><div class="pv-native-body"><label style="font-size:9px;font-weight:500">Motivo da reprovação *</label><textarea class="pa-reason" id="aprovacoes-pa-reject-reason" placeholder="Explique objetivamente o que precisa ser revisto."></textarea><div class="pa-error" id="aprovacoes-pa-reject-error"></div></div><div class="pv-native-actions"><a class="pv-native-secondary" href="#aprovacoes-pa-review">Voltar</a><a id="aprovacoes-pa-reject-confirm" href="#">Confirmar reprovação</a></div></div></section>
       <div class="pv-toast" id="aprovacoes-pv-toast"><i data-lucide="info" aria-hidden="true"></i><span></span></div>
 </section>
@@ -3618,6 +3971,14 @@ html>body{padding:0}
           group:row.grupo_nome||'—',
           authorId:row.criado_por||null,
           author:(row.criado_por&&userNames[row.criado_por])||row.criado_por||'—',
+          // "Aprovado por"/"Reprovado por" (2026-08-31): `aprovado_por`/
+          // `rejeitado_por` já eram gravados no banco desde a rodada de
+          // 25/08 (ver o UPDATE em aprovacoes-pa-approve/reject-confirm
+          // logo abaixo) - só nunca tinham sido lidos nem exibidos aqui.
+          // Reaproveita o mesmo mecanismo de resolução de nome por uuid já
+          // usado para "Criado por" (resolveAuthorNames/applyAuthorNames).
+          decidedById:row.aprovado_por||row.rejeitado_por||null,
+          decidedBy:(function(){const id=row.aprovado_por||row.rejeitado_por;return (id&&userNames[id])||id||''})(),
           date:parts.date,
           time:parts.time,
           status:mapStatus(row.status),
@@ -3629,7 +3990,7 @@ html>body{padding:0}
           // o texto, sem a foto, mesmo já tendo sido enviada ao Storage
           // no cadastro. Quem só tem acesso a Aprovações (não abre
           // Comunicados) ficava sem ver a imagem antes de decidir.
-          image:row.url_imagem||'',
+          tipo:row.tipo||'',image:row.url_imagem||'',
           // Recorrência (2026-08-26): precisa aparecer aqui porque quem
           // aprova só vê UMA data por vez (a 1ª ocorrência da série - as
           // seguintes nunca passam por Aprovações, ver
@@ -3661,7 +4022,9 @@ html>body{padding:0}
       function resolveAuthorNames(rows){
         const supaClient=window.AsserthSupabase;
         if(!supaClient)return Promise.resolve();
-        const ids=[...new Set(rows.map(r=>r.authorId).filter(id=>id&&UUID_RE.test(id)&&!userNames[id]))];
+        // Junta autor + quem decidiu (aprovou/reprovou) num único lote -
+        // mesma função `nomes_usuarios`, só precisa de mais uuids.
+        const ids=[...new Set(rows.flatMap(r=>[r.authorId,r.decidedById]).filter(id=>id&&UUID_RE.test(id)&&!userNames[id]))];
         if(!ids.length)return Promise.resolve();
         return supaClient.rpc('nomes_usuarios',{p_ids:ids}).then(function(resposta){
           if(resposta&&resposta.error){
@@ -3674,7 +4037,10 @@ html>body{padding:0}
         });
       }
       function applyAuthorNames(rows){
-        rows.forEach(function(r){if(r.authorId&&userNames[r.authorId])r.author=userNames[r.authorId]});
+        rows.forEach(function(r){
+          if(r.authorId&&userNames[r.authorId])r.author=userNames[r.authorId];
+          if(r.decidedById&&userNames[r.decidedById])r.decidedBy=userNames[r.decidedById];
+        });
       }
       function loadRecords(){
         const supaClient=window.AsserthSupabase;
@@ -3697,6 +4063,14 @@ html>body{padding:0}
               selected.author=userNames[selected.authorId];
               const authorEl=document.getElementById('aprovacoes-pa-review-author');
               if(authorEl)authorEl.textContent=selected.author;
+            }
+            // Idem para "aprovado/reprovado por" - se a tela de revisão já
+            // estava aberta quando o nome chegou, só atualiza o texto da
+            // auditoria (sem navegar nem mexer no hash, igual ao autor).
+            if(selected&&selected.status!=='pending'&&selected.decidedById&&userNames[selected.decidedById]){
+              selected.decidedBy=userNames[selected.decidedById];
+              const auditEl=document.getElementById('aprovacoes-pa-review-audit');
+              if(auditEl)auditEl.innerHTML='<strong>Decisão registrada:</strong> '+labels[selected.status][0]+(selected.decisionAt?' em '+esc(selected.decisionAt):'')+(selected.decidedBy?' por '+esc(selected.decidedBy):'')+(selected.reason?'<br><strong>Justificativa:</strong> '+esc(selected.reason):'');
             }
           });
         }).catch(function(err){
@@ -3733,7 +4107,7 @@ html>body{padding:0}
         }catch(err){console.error('[Aprovações] tentativa de carregar campanhas reais falhou (mantendo filtro padrão):',err)}
       })();
       function render(){const total=Math.max(1,Math.ceil(filtered.length/size));if(page>total)page=total;const start=(page-1)*size,rows=filtered.slice(start,start+size);list.innerHTML=rows.length?rows.map(r=>{const s=labels[r.status],stateClass=r.status==='pending'?'is-pending':r.status==='approved'?'is-sent':'is-error';return '<div class="pv-comm-row"><div><strong>'+esc(r.title)+'</strong><span>'+esc(r.campaign)+'</span></div><div class="pv-comm-cell">'+esc(r.group)+'</div><div class="pv-comm-cell">'+date(r.date)+' · '+r.time+'</div><div class="pv-comm-state"><span class="pv-comm-status '+stateClass+'">'+s[0]+'</span></div><a class="pv-comm-view" href="#aprovacoes-pa-review" data-review="'+r.id+'">'+(r.status==='pending'?'Analisar':'Visualizar')+' →</a></div>'}).join(''):'<div style="padding:30px;text-align:center;color:var(--pv-muted);font-size:9px">Nenhum comunicado encontrado.</div>';document.getElementById('aprovacoes-pa-result-label').textContent=filtered.length+' registros';document.getElementById('aprovacoes-pa-page-summary').textContent=filtered.length?(start+1)+'–'+(start+rows.length)+' de '+filtered.length:'0 registros';['pending','approved','rejected'].forEach(s=>document.getElementById('aprovacoes-pa-count-'+s).textContent=filtered.filter(r=>r.status===s).length);const next=filtered.filter(r=>r.status==='pending').sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time))[0];document.getElementById('aprovacoes-pa-next-time').textContent=next?next.time:'—';const nextDateEl=document.getElementById('aprovacoes-pa-next-date');nextDateEl.textContent=next?date(next.date)+' · '+next.group:'sem pendências';if(window.AsserthI18n&&typeof window.AsserthI18n.retagAndRefresh==='function')window.AsserthI18n.retagAndRefresh(nextDateEl);window.AsserthPaginacao.render(pages,{page:page,total:total,onSelect:function(p){page=p;render()}});}
-      function openReview(r){selected=r;document.getElementById('aprovacoes-pa-review-title').textContent=r.title;document.getElementById('aprovacoes-pa-review-author').textContent=r.author;document.getElementById('aprovacoes-pa-review-context').textContent=r.group+' · '+r.campaign;document.getElementById('aprovacoes-pa-review-schedule').textContent=date(r.date)+' às '+r.time;document.getElementById('aprovacoes-pa-review-message').innerHTML=fmt(r.message);document.getElementById('aprovacoes-pa-review-time').textContent=r.time+' ✓✓';const reviewImg=document.getElementById('aprovacoes-pa-review-image');if(r.image){reviewImg.src=r.image;reviewImg.style.display='block'}else{reviewImg.removeAttribute('src');reviewImg.style.display='none'}const recurrenceNote=document.getElementById('aprovacoes-pa-review-recurrence');if(r.recorrencia&&r.recorrencia!=='once'){recurrenceNote.innerHTML='<strong>🔁 Comunicado recorrente:</strong> '+esc(recurrenceLabels[r.recorrencia]||r.recorrencia)+(r.recorrenciaFim?', até '+date(r.recorrenciaFim):'')+'. Confira se o texto continua fazendo sentido sendo reenviado nas próximas datas.';recurrenceNote.hidden=false}else{recurrenceNote.hidden=true}const actions=document.getElementById('aprovacoes-pa-review-actions'),audit=document.getElementById('aprovacoes-pa-review-audit');actions.hidden=r.status!=='pending';audit.hidden=r.status==='pending';if(r.status!=='pending')audit.innerHTML='<strong>Decisão registrada:</strong> '+labels[r.status][0]+(r.decisionAt?' em '+esc(r.decisionAt):'')+(r.reason?'<br><strong>Justificativa:</strong> '+esc(r.reason):'');location.hash='aprovacoes-pa-review'}
+      function openReview(r){selected=r;document.getElementById('aprovacoes-pa-review-title').textContent=r.title;document.getElementById('aprovacoes-pa-review-author').textContent=r.author;document.getElementById('aprovacoes-pa-review-context').textContent=r.group+' · '+r.campaign;document.getElementById('aprovacoes-pa-review-schedule').textContent=date(r.date)+' às '+r.time;document.getElementById('aprovacoes-pa-review-message').innerHTML=fmt(r.message);document.getElementById('aprovacoes-pa-review-time').textContent=r.time+' ✓✓';const reviewImg=document.getElementById('aprovacoes-pa-review-image'),reviewVid=document.getElementById('aprovacoes-pa-review-video'),reviewIsVideo=/v[ií]deo/i.test(r.tipo||'');reviewImg.removeAttribute('src');reviewImg.style.display='none';try{reviewVid.pause()}catch(e){}reviewVid.removeAttribute('src');reviewVid.style.display='none';if(r.image){const el=reviewIsVideo?reviewVid:reviewImg;el.src=r.image;el.style.display='block'}const recurrenceNote=document.getElementById('aprovacoes-pa-review-recurrence');if(r.recorrencia&&r.recorrencia!=='once'){recurrenceNote.innerHTML='<strong>🔁 Comunicado recorrente:</strong> '+esc(recurrenceLabels[r.recorrencia]||r.recorrencia)+(r.recorrenciaFim?', até '+date(r.recorrenciaFim):'')+'. Confira se o texto continua fazendo sentido sendo reenviado nas próximas datas.';recurrenceNote.hidden=false}else{recurrenceNote.hidden=true}const actions=document.getElementById('aprovacoes-pa-review-actions'),audit=document.getElementById('aprovacoes-pa-review-audit');actions.hidden=r.status!=='pending';audit.hidden=r.status==='pending';if(r.status!=='pending')audit.innerHTML='<strong>Decisão registrada:</strong> '+labels[r.status][0]+(r.decisionAt?' em '+esc(r.decisionAt):'')+(r.decidedBy?' por '+esc(r.decidedBy):'')+(r.reason?'<br><strong>Justificativa:</strong> '+esc(r.reason):'');location.hash='aprovacoes-pa-review'}
       list.addEventListener('click',e=>{const b=e.target.closest('[data-review]');if(b)openReview(data.find(r=>r.id===b.dataset.review||String(r.id)===b.dataset.review))});
       // Aprovar: AGUARDANDO_APROVACAO -> PENDENTE (o único status que o
       // workflow n8n "Disparo de Comunicados da Comunidade" busca). É
@@ -3803,7 +4177,7 @@ html>body{padding:0}
 
 <section id="view-administracao" class="view pv-main" data-view="administracao" hidden>
 <div class="pv-page-head"><div><span class="pv-kicker">Gestão</span><h1>Administração</h1><p>Gerencie usuários, acessos e permissões da plataforma.</p></div><div class="pv-comm-head-side"><div class="pv-profile"><input class="pv-profile-toggle" id="pv-profile-toggle-administracao" type="checkbox"><label class="pv-profile-btn" for="pv-profile-toggle-administracao" aria-label="Abrir opções do usuário"><span class="pv-avatar">AS</span></label><div class="pv-profile-menu" id="pv-profile-menu-administracao"><div class="pv-profile-summary"><strong>Ana Silva</strong><span>Administradora · Tecnologia</span></div><a href="#pv-native-profile"><i data-lucide="user-round" aria-hidden="true"></i> Meu perfil</a><a href="#pv-native-preferences"><i data-lucide="palette" aria-hidden="true"></i> Aparência e preferências</a><a href="#pv-native-notifications"><i data-lucide="bell" aria-hidden="true"></i> Notificações</a><a href="#pv-native-logout"><i data-lucide="log-out" aria-hidden="true"></i> Sair</a></div></div><div class="pp-actions"><a class="pv-comm-button" href="#administracao-pa-filter"><i data-lucide="sliders-horizontal"></i>Filtrar</a><a class="pv-comm-button is-primary" href="#administracao-pa-new"><i data-lucide="user-plus"></i>Novo usuário</a></div></div></div><div class="pv-metrics"><div class="pv-metric"><span>Usuários cadastrados</span><strong id="administracao-pa-total">8</strong><small>acessos visíveis</small></div><div class="pv-metric"><span>Ativos</span><strong id="administracao-pa-active">6</strong><small>podem acessar</small></div><div class="pv-metric"><span>Aprovadores</span><strong id="administracao-pa-approvers">3</strong><small>autorizados a decidir</small></div><div class="pv-metric"><span>Inativos</span><strong id="administracao-pa-inactive">2</strong><small>acesso bloqueado</small></div></div><section class="pv-section"><div class="pv-comm-toolbar"><div><h2>Usuários e permissões</h2><p>Os registros exibidos respeitam o escopo administrativo do TI.</p></div><span class="pv-comm-cell" id="administracao-pa-label"></span></div><div class="pa-list" id="administracao-pa-list"></div><div class="pv-pagination"><span id="administracao-pa-summary"></span><div class="pv-page-buttons" id="administracao-pa-pages"></div></div></section>
-<section class="pv-native-panel" id="administracao-pa-filter"><div class="pv-native-drawer"><div class="pv-native-head"><div><h2>Filtrar usuários</h2><p>Localize os acessos necessários.</p></div><a class="pv-native-close" href="#">×</a></div><div class="pv-native-body"><div class="pa-filter-grid"><div class="pv-native-field"><label>Nome ou e-mail</label><input id="administracao-pa-q" placeholder="Digite para pesquisar"></div><div class="pv-native-field"><label>Status</label><select id="administracao-pa-status"><option value="">Todos</option><option value="active">Ativo</option><option value="inactive">Inativo</option><option value="pending">Convite pendente</option></select></div><div class="pv-native-field"><label>Área principal</label><select id="administracao-pa-area"><option value="">Todas</option><option>Tecnologia</option><option>Comunicação Interna</option><option>Departamento Pessoal</option><option>Recrutamento e Seleção</option><option>Financeiro</option><option>Comercial</option></select></div><div class="pv-native-field"><label>Perfil</label><select id="administracao-pa-role"><option value="">Todos</option><option value="admin">Administrador/TI</option><option value="approver">Aprovador</option><option value="operator">Operacional</option></select></div></div></div><div class="pv-native-actions"><a class="pv-native-secondary" id="administracao-pa-clear" href="#">Limpar</a><a id="administracao-pa-apply" href="#">Aplicar filtros</a></div></div></section><section class="pv-native-panel" id="administracao-pa-new"><div class="pv-native-drawer is-wide"><div class="pv-native-head"><div><h2 id="administracao-pa-form-title">Novo usuário</h2><p>Defina o acesso e as permissões disponíveis.</p></div><a class="pv-native-close" href="#">×</a></div><div class="pv-native-body"><div class="pa-form-grid"><div class="pv-native-field"><label>Nome completo *</label><input id="administracao-pa-name" placeholder="Nome do usuário"></div><div class="pv-native-field"><label>E-mail corporativo *</label><input id="administracao-pa-email" type="email" placeholder="nome@asserth.com.br"></div><div class="pv-native-field"><label>Área principal *</label><select id="administracao-pa-main-area"><option value="">Selecione</option><option>Tecnologia</option><option>Comunicação Interna</option><option>Departamento Pessoal</option><option>Recrutamento e Seleção</option><option>Financeiro</option><option>Comercial</option></select></div><div class="pv-native-field" id="administracao-pa-status-field"><label>Status do acesso</label><select id="administracao-pa-form-status"><option value="active">Ativo</option><option value="inactive">Inativo</option></select></div></div><div class="pa-section"><div class="pa-section-head"><div><h3>Perfil de acesso</h3><p>O perfil define a base inicial de permissões.</p></div></div><div class="pa-role-grid"><label class="pa-role"><input type="radio" name="pa-role" value="operator" checked><strong>Operacional</strong><small>Executa as funções autorizadas, sem administrar acessos.</small></label><label class="pa-role"><input type="radio" name="pa-role" value="approver"><strong>Aprovador</strong><small>Analisa comunicados das áreas e grupos permitidos.</small></label><label class="pa-role"><input type="radio" name="pa-role" value="admin"><strong>Administrador/TI</strong><small>Acesso completo, incluindo Administração.</small></label></div></div><div class="pa-section"><div class="pa-section-head"><div><h3>Áreas autorizadas</h3><p>Determinam quais registros e campanhas o usuário visualiza.</p></div></div><div class="pa-picker" data-picker="area"><button class="pa-picker-trigger" type="button"><span class="pa-picker-chips" id="administracao-pa-area-chips"><span class="pa-picker-placeholder">Selecione</span></span><span>⌄</span></button><div class="pa-picker-menu"><label class="pa-picker-all"><input type="checkbox" data-select-all="area"> Selecionar todos</label><div id="administracao-pa-areas"></div></div></div></div><div class="pa-section"><div class="pa-section-head"><div><h3>Grupos autorizados</h3><p>Definem onde o usuário poderá consultar ou criar comunicações.</p></div></div><div class="pa-picker" data-picker="group"><button class="pa-picker-trigger" type="button"><span class="pa-picker-chips" id="administracao-pa-group-chips"><span class="pa-picker-placeholder">Selecione</span></span><span>⌄</span></button><div class="pa-picker-menu"><label class="pa-picker-all"><input type="checkbox" data-select-all="group"> Selecionar todos</label><div id="administracao-pa-groups"></div></div></div></div><div class="pa-section"><div class="pa-section-head"><div><h3>Permissões funcionais</h3><p>Complemente o perfil com autorizações específicas.</p></div></div><div class="pa-picker" data-picker="permission"><button class="pa-picker-trigger" type="button"><span class="pa-picker-chips" id="administracao-pa-permission-chips"><span class="pa-picker-placeholder">Selecione</span></span><span>⌄</span></button><div class="pa-picker-menu"><label class="pa-picker-all"><input type="checkbox" data-select-all="permission"> Selecionar todos</label><div id="administracao-pa-permissions"></div></div></div><div class="pa-note">A Administração de usuários permanece exclusiva para perfis Administrador/TI. Uma única aprovação autorizada encerra a decisão do comunicado.</div></div></div><div class="pv-native-actions"><a class="pv-native-secondary" id="administracao-pa-cancel-form" href="#">Cancelar</a><a id="administracao-pa-save" href="#">Criar usuário</a></div></div></section><section class="pv-native-panel" id="administracao-pa-detail"><div class="pv-native-drawer is-wide"><div class="pv-native-head"><div><h2>Detalhes do usuário</h2><p>Consulte o acesso, permissões e histórico de segurança.</p></div><a class="pv-native-close" href="#">×</a></div><div class="pv-native-body"><div class="pa-detail" id="administracao-pa-detail-data"></div><div class="pa-section"><div class="pa-section-head"><div><h3>Áreas autorizadas</h3></div></div><div class="pa-chips compact" id="administracao-pa-detail-areas"></div></div><div class="pa-section"><div class="pa-section-head"><div><h3>Grupos autorizados</h3></div></div><div class="pa-chips compact" id="administracao-pa-detail-groups"></div></div><div class="pa-section"><div class="pa-section-head"><div><h3>Permissões</h3></div></div><div class="pa-chips compact" id="administracao-pa-detail-permissions"></div></div><div class="pa-section"><div class="pa-section-head"><div><h3>Auditoria do acesso</h3><p>Registros importantes para rastreabilidade.</p></div></div><div class="pa-audit" id="administracao-pa-audit"></div></div></div><div class="pv-native-actions"><a class="pv-native-secondary" href="#">Fechar</a><a class="pv-native-secondary" id="administracao-pa-sessions" href="#">Encerrar sessões</a><a class="pv-native-secondary" id="administracao-pa-toggle-status" href="#">Desativar acesso</a><a class="pv-native-secondary pa-danger" id="administracao-pa-delete" href="#administracao-pa-delete-confirm">Excluir usuário</a><a id="administracao-pa-edit" href="#administracao-pa-new">Editar usuário</a></div></div></section><section class="pv-native-panel" id="administracao-pa-delete-confirm"><div class="pv-native-drawer"><div class="pv-native-head"><div><h2>Excluir usuário</h2><p>Esta ação remove definitivamente o acesso da plataforma.</p></div><a class="pv-native-close" href="#administracao-pa-detail">×</a></div><div class="pv-native-body"><div class="pa-delete-warning">Confirme a exclusão do usuário. O histórico de auditoria será preservado, mas o acesso precisará ser criado novamente caso a pessoa volte a utilizar a plataforma.</div><div class="pa-section"><div class="pa-section-head"><div><h3>Retirar também da comunidade?</h3><p>Escolha como a pessoa deverá permanecer na Comunidade Asserth.</p></div></div><div class="pa-delete-choice"><label><input type="radio" name="pa-remove-community" value="no" checked><span><strong>Não, manter como membro</strong><small>Exclui somente o acesso à plataforma. A pessoa continua nos grupos atuais.</small></span></label><label><input type="radio" name="pa-remove-community" value="yes"><span><strong>Sim, retirar da comunidade</strong><small>Cria uma solicitação individual de remoção para execução e acompanhamento em Processamentos.</small></span></label></div></div></div><div class="pv-native-actions"><a class="pv-native-secondary" href="#administracao-pa-detail">Voltar</a><a class="pa-danger-solid" id="administracao-pa-confirm-delete" href="#">Confirmar exclusão</a></div></div></section><div class="pa-toast" id="administracao-pa-toast"></div>
+<section class="pv-native-panel" id="administracao-pa-filter"><div class="pv-native-drawer"><div class="pv-native-head"><div><h2>Filtrar usuários</h2><p>Localize os acessos necessários.</p></div><a class="pv-native-close" href="#">×</a></div><div class="pv-native-body"><div class="pa-filter-grid"><div class="pv-native-field"><label>Nome ou e-mail</label><input id="administracao-pa-q" placeholder="Digite para pesquisar"></div><div class="pv-native-field"><label>Status</label><select id="administracao-pa-status"><option value="">Todos</option><option value="active">Ativo</option><option value="inactive">Inativo</option><option value="pending">Convite pendente</option></select></div><div class="pv-native-field"><label>Área principal</label><select id="administracao-pa-area"><option value="">Todas</option><option>Tecnologia</option><option>Comunicação Interna</option><option>Departamento Pessoal</option><option>Recrutamento e Seleção</option><option>Financeiro</option><option>Comercial</option></select></div><div class="pv-native-field"><label>Perfil</label><select id="administracao-pa-role"><option value="">Todos</option><option value="admin">Administrador/TI</option><option value="approver">Aprovador</option><option value="operator">Operacional</option></select></div></div></div><div class="pv-native-actions"><a class="pv-native-secondary" id="administracao-pa-clear" href="#">Limpar</a><a id="administracao-pa-apply" href="#">Aplicar filtros</a></div></div></section><section class="pv-native-panel" id="administracao-pa-new"><div class="pv-native-drawer is-wide"><div class="pv-native-head"><div><h2 id="administracao-pa-form-title">Novo usuário</h2><p>Defina o acesso e as permissões disponíveis.</p></div><a class="pv-native-close" href="#">×</a></div><div class="pv-native-body"><div class="pa-form-grid"><div class="pv-native-field"><label>Nome completo *</label><input id="administracao-pa-name" placeholder="Nome do usuário"></div><div class="pv-native-field"><label>E-mail corporativo *</label><input id="administracao-pa-email" type="email" placeholder="nome@asserth.com.br"></div><div class="pv-native-field"><label>Área principal *</label><select id="administracao-pa-main-area"><option value="">Selecione</option><option>Tecnologia</option><option>Comunicação Interna</option><option>Departamento Pessoal</option><option>Recrutamento e Seleção</option><option>Financeiro</option><option>Comercial</option></select></div><div class="pv-native-field" id="administracao-pa-status-field"><label>Status do acesso</label><select id="administracao-pa-form-status"><option value="active">Ativo</option><option value="inactive">Inativo</option></select></div></div><div class="pa-section"><div class="pa-section-head"><div><h3>Perfil de acesso</h3><p>O perfil define a base inicial de permissões.</p></div></div><div class="pa-role-grid"><label class="pa-role"><input type="radio" name="pa-role" value="operator" checked><strong>Operacional</strong><small>Executa as funções autorizadas, sem administrar acessos.</small></label><label class="pa-role"><input type="radio" name="pa-role" value="approver"><strong>Aprovador</strong><small>Analisa comunicados das áreas e grupos permitidos.</small></label><label class="pa-role"><input type="radio" name="pa-role" value="admin"><strong>Administrador/TI</strong><small>Acesso completo, incluindo Administração.</small></label></div></div><div class="pa-section"><div class="pa-section-head"><div><h3>Áreas autorizadas</h3><p>Determinam quais registros e campanhas o usuário visualiza.</p></div></div><div class="pa-picker" data-picker="area"><button class="pa-picker-trigger" type="button"><span class="pa-picker-chips" id="administracao-pa-area-chips"><span class="pa-picker-placeholder">Selecione</span></span><span>⌄</span></button><div class="pa-picker-menu"><label class="pa-picker-all"><input type="checkbox" data-select-all="area"> Selecionar todos</label><div id="administracao-pa-areas"></div></div></div></div><div class="pa-section"><div class="pa-section-head"><div><h3>Grupos autorizados</h3><p>Definem onde o usuário poderá consultar ou criar comunicações.</p></div></div><div class="pa-picker" data-picker="group"><button class="pa-picker-trigger" type="button"><span class="pa-picker-chips" id="administracao-pa-group-chips"><span class="pa-picker-placeholder">Selecione</span></span><span>⌄</span></button><div class="pa-picker-menu"><label class="pa-picker-all"><input type="checkbox" data-select-all="group"> Selecionar todos</label><div id="administracao-pa-groups"></div></div></div></div><div class="pa-section"><div class="pa-section-head"><div><h3>Permissões funcionais</h3><p>Complemente o perfil com autorizações específicas.</p></div></div><div class="pa-picker" data-picker="permission"><button class="pa-picker-trigger" type="button"><span class="pa-picker-chips" id="administracao-pa-permission-chips"><span class="pa-picker-placeholder">Selecione</span></span><span>⌄</span></button><div class="pa-picker-menu"><label class="pa-picker-all"><input type="checkbox" data-select-all="permission"> Selecionar todos</label><div id="administracao-pa-permissions"></div></div></div><div class="pa-note">A Administração de usuários permanece exclusiva para perfis Administrador/TI. Uma única aprovação autorizada encerra a decisão do comunicado.</div></div></div><div class="pa-aviso" id="administracao-pa-aviso" hidden role="alert"></div><div class="pv-native-actions"><a class="pv-native-secondary" id="administracao-pa-cancel-form" href="#">Cancelar</a><a id="administracao-pa-save" href="#">Criar usuário</a></div></div></section><section class="pv-native-panel" id="administracao-pa-detail"><div class="pv-native-drawer is-wide"><div class="pv-native-head"><div><h2>Detalhes do usuário</h2><p>Consulte o acesso, permissões e histórico de segurança.</p></div><a class="pv-native-close" href="#">×</a></div><div class="pv-native-body"><div class="pa-detail" id="administracao-pa-detail-data"></div><div class="pa-section"><div class="pa-section-head"><div><h3>Áreas autorizadas</h3></div></div><div class="pa-chips compact" id="administracao-pa-detail-areas"></div></div><div class="pa-section"><div class="pa-section-head"><div><h3>Grupos autorizados</h3></div></div><div class="pa-chips compact" id="administracao-pa-detail-groups"></div></div><div class="pa-section"><div class="pa-section-head"><div><h3>Permissões</h3></div></div><div class="pa-chips compact" id="administracao-pa-detail-permissions"></div></div><div class="pa-section"><div class="pa-section-head"><div><h3>Auditoria do acesso</h3><p>Registros importantes para rastreabilidade.</p></div></div><div class="pa-audit" id="administracao-pa-audit"></div></div></div><div class="pv-native-actions"><a class="pv-native-secondary" href="#">Fechar</a><a class="pv-native-secondary" id="administracao-pa-sessions" href="#">Encerrar sessões</a><a class="pv-native-secondary" id="administracao-pa-toggle-status" href="#">Desativar acesso</a><a class="pv-native-secondary pa-danger" id="administracao-pa-delete" href="#administracao-pa-delete-confirm">Excluir usuário</a><a id="administracao-pa-edit" href="#administracao-pa-new">Editar usuário</a></div></div></section><section class="pv-native-panel" id="administracao-pa-delete-confirm"><div class="pv-native-drawer"><div class="pv-native-head"><div><h2>Excluir usuário</h2><p>Esta ação remove definitivamente o acesso da plataforma.</p></div><a class="pv-native-close" href="#administracao-pa-detail">×</a></div><div class="pv-native-body"><div class="pa-delete-warning">Confirme a exclusão do usuário. O histórico de auditoria será preservado, mas o acesso precisará ser criado novamente caso a pessoa volte a utilizar a plataforma.</div><div class="pa-section"><div class="pa-section-head"><div><h3>Retirar também da comunidade?</h3><p>Escolha como a pessoa deverá permanecer na Comunidade Asserth.</p></div></div><div class="pa-delete-choice"><label><input type="radio" name="pa-remove-community" value="no" checked><span><strong>Não, manter como membro</strong><small>Exclui somente o acesso à plataforma. A pessoa continua nos grupos atuais.</small></span></label><label><input type="radio" name="pa-remove-community" value="yes"><span><strong>Sim, retirar da comunidade</strong><small>Cria uma solicitação individual de remoção para execução e acompanhamento em Processamentos.</small></span></label></div></div></div><div class="pv-native-actions"><a class="pv-native-secondary" href="#administracao-pa-detail">Voltar</a><a class="pa-danger-solid" id="administracao-pa-confirm-delete" href="#">Confirmar exclusão</a></div></div></section><div class="pa-toast" id="administracao-pa-toast"></div>
 </section>
 <script>
 (function(){
@@ -3910,7 +4284,16 @@ html>body{padding:0}
       checks('administracao-pa-areas',AREAS_LIST,'area');
       checks('administracao-pa-groups',GROUPS_LIST,'group');
       $('administracao-pa-permissions').innerHTML=permList.map(([v,l])=>`<label class="pa-picker-option"><input type="checkbox" name="permission" value="${v}"><span>${l}</span></label>`).join('');
-      function fillForm(u=null){editing=u?.id||null;$('administracao-pa-form-title').textContent=u?'Editar usuário':'Novo usuário';$('administracao-pa-status-field').style.display=u?'block':'none';$('administracao-pa-save').textContent=u?'Salvar alterações':'Criar usuário';if(window.AsserthI18n&&typeof window.AsserthI18n.retagAndRefresh==='function')window.AsserthI18n.retagAndRefresh([$('administracao-pa-form-title'),$('administracao-pa-save')]);$('administracao-pa-name').value=u?.name||'';const emailField=$('administracao-pa-email');emailField.value=u?.email||'';emailField.readOnly=!!u;emailField.title=u?'O e-mail não pode ser alterado aqui porque é ele que liga este perfil ao login já criado em Authentication.':'';$('administracao-pa-main-area').value='';$('administracao-pa-form-status').value=u?.status==='inactive'?'inactive':'active';document.querySelector(`input[name="pa-role"][value="${u?.role||'operator'}"]`).checked=true;document.querySelectorAll('input[name="area"]').forEach(x=>x.checked=!!u?.areas?.includes(x.value));document.querySelectorAll('input[name="group"]').forEach(x=>x.checked=!!u?.groups?.includes(x.value));document.querySelectorAll('input[name="permission"]').forEach(x=>x.checked=!!u?.permissions.includes(x.value))}
+      function limparAviso(){const a=$('administracao-pa-aviso');if(a){a.hidden=true;a.textContent=''}}
+      function mostrarAviso(titulo,paragrafo,passos){
+        const a=$('administracao-pa-aviso');if(!a){toast(titulo);return}
+        a.textContent='';
+        const t=document.createElement('strong');t.textContent=titulo;a.appendChild(t);
+        if(paragrafo){const p=document.createElement('p');p.textContent=paragrafo;a.appendChild(p)}
+        if(passos&&passos.length){const ol=document.createElement('ol');passos.forEach(function(s){const li=document.createElement('li');li.textContent=s;ol.appendChild(li)});a.appendChild(ol)}
+        a.hidden=false;
+      }
+      function fillForm(u=null){limparAviso();editing=u?.id||null;$('administracao-pa-form-title').textContent=u?'Editar usuário':'Novo usuário';$('administracao-pa-status-field').style.display=u?'block':'none';$('administracao-pa-save').textContent=u?'Salvar alterações':'Criar usuário';if(window.AsserthI18n&&typeof window.AsserthI18n.retagAndRefresh==='function')window.AsserthI18n.retagAndRefresh([$('administracao-pa-form-title'),$('administracao-pa-save')]);$('administracao-pa-name').value=u?.name||'';const emailField=$('administracao-pa-email');emailField.value=u?.email||'';emailField.readOnly=!!u;emailField.title=u?'O e-mail não pode ser alterado aqui porque é ele que liga este perfil ao login já criado em Authentication.':'';$('administracao-pa-main-area').value='';$('administracao-pa-form-status').value=u?.status==='inactive'?'inactive':'active';document.querySelector(`input[name="pa-role"][value="${u?.role||'operator'}"]`).checked=true;document.querySelectorAll('input[name="area"]').forEach(x=>x.checked=!!u?.areas?.includes(x.value));document.querySelectorAll('input[name="group"]').forEach(x=>x.checked=!!u?.groups?.includes(x.value));document.querySelectorAll('input[name="permission"]').forEach(x=>x.checked=!!u?.permissions.includes(x.value))}
       function detail(u){current=u;window.__paCurrent=u;$('administracao-pa-detail-data').innerHTML=`<div><span>Nome</span><strong>${u.name}</strong></div><div><span>E-mail corporativo</span><strong>${u.email}</strong></div><div><span>Perfil</span><strong>${roleLabel[u.role]}</strong></div><div><span>Status</span><strong>${statusLabel[u.status]}</strong></div><div><span>Cadastrado em</span><strong>${u.last}</strong></div>`;$('administracao-pa-detail-areas').innerHTML=u.areas.length?u.areas.map(x=>`<span class="pa-chip">${x}</span>`).join(''):'<span class="pa-chip" style="opacity:.6">Nenhuma área vinculada</span>';$('administracao-pa-detail-groups').innerHTML=u.groups.length?u.groups.map(x=>`<span class="pa-chip">${x}</span>`).join(''):'<span class="pa-chip" style="opacity:.6">Nenhum grupo vinculado</span>';$('administracao-pa-detail-permissions').innerHTML=u.isAdmin?'<span class="pa-chip">Acesso total (Administrador/TI)</span>':(u.permissions.length?u.permissions.map(x=>`<span class="pa-chip">${permList.find(p=>p[0]===x)?.[1]||x}</span>`).join(''):'<span class="pa-chip" style="opacity:.6">Nenhum módulo liberado</span>');$('administracao-pa-audit').innerHTML=`<div class="pa-audit-row"><i>✓</i><div><strong>Acesso ${u.status==='active'?'ativo':'bloqueado'}</strong><p>Status vigente do usuário (tabela usuarios_plataforma).</p></div><time>${u.last}</time></div>`;$('administracao-pa-toggle-status').textContent=u.status==='active'?'Desativar acesso':'Ativar acesso';if(window.AsserthI18n&&typeof window.AsserthI18n.retagAndRefresh==='function')window.AsserthI18n.retagAndRefresh($('administracao-pa-toggle-status'));$('administracao-pa-toggle-status').classList.toggle('pa-danger',u.status==='active')}
       $('administracao-pa-list').onclick=e=>{const a=e.target.closest('[data-user]');if(a)detail(users.find(u=>String(u.id)===a.dataset.user))};
       document.querySelector('[href="#administracao-pa-new"]').addEventListener('click',()=>fillForm());
@@ -3921,9 +4304,13 @@ html>body{padding:0}
       // Authentication); edição de um usuário já existente é um update
       // direto, permitido pela policy "admin_gerencia_perfis" pra quem é
       // is_admin.
+      // Endereço do webhook do fluxo n8n "Criar Login de Usuário"
+      // (URL de PRODUÇÃO do nó Webhook). Vazio = criação manual no Supabase.
+      const URL_CRIAR_LOGIN='https://n8n.srv1000189.hstgr.cloud/webhook/criar-login-usuario';
       $('administracao-pa-save').onclick=async e=>{
         e.preventDefault();
-        const name=$('administracao-pa-name').value.trim(),email=$('administracao-pa-email').value.trim();
+        limparAviso();
+        const name=$('administracao-pa-name').value.trim(),email=$('administracao-pa-email').value.trim().toLowerCase();
         if(!name||!email){toast('Preencha nome e e-mail.');return}
         const role=document.querySelector('input[name="pa-role"]:checked').value;
         let selecionadas=[...document.querySelectorAll('input[name="permission"]:checked')].map(x=>x.value);
@@ -3948,11 +4335,52 @@ html>body{padding:0}
             if(resposta&&resposta.error){console.error('[Administração] erro ao salvar usuário:',resposta.error);toast('Não foi possível salvar: '+(resposta.error.message||'tente novamente.'));return}
             toast('Usuário atualizado com sucesso.');
           }else{
-            const resposta=await supaClient.rpc('criar_usuario_por_email',{p_email:email,p_nome:name,p_is_admin:isAdmin,p_modulos:modulos,p_areas:areas,p_grupos:grupos});
+            const chamarRpc=()=>supaClient.rpc('criar_usuario_por_email',{p_email:email,p_nome:name,p_is_admin:isAdmin,p_modulos:modulos,p_areas:areas,p_grupos:grupos});
+            let resposta=await chamarRpc();
             if(resposta&&resposta.error){console.error('[Administração] erro ao criar usuário:',resposta.error);toast('Não foi possível criar: '+(resposta.error.message||'tente novamente.'));return}
-            const linha=Array.isArray(resposta.data)?resposta.data[0]:resposta.data;
-            if(!linha||!linha.criado){toast((linha&&linha.mensagem)||'Não existe login com este e-mail em Authentication ainda. Crie o login lá primeiro.');return}
-            toast('Usuário criado e vinculado ao login existente.');
+            let linha=Array.isArray(resposta.data)?resposta.data[0]:resposta.data;
+            let loginCriadoAgora=false;
+            let emailBoasVindas=true;
+            // Sem login ainda: se o fluxo do n8n estiver configurado
+            // (URL_CRIAR_LOGIN), pede pra ele criar o login e tenta de novo.
+            if((!linha||!linha.criado)&&URL_CRIAR_LOGIN&&(!(linha&&linha.mensagem)||/authentication|login/i.test(linha.mensagem))){
+              try{
+                const sess=await supaClient.auth.getSession();
+                const jwt=sess&&sess.data&&sess.data.session&&sess.data.session.access_token;
+                if(!jwt)throw new Error('sessão expirada');
+                // POST "simples" (form-urlencoded) evita o pré-voo de CORS.
+                const r=await fetch(URL_CRIAR_LOGIN,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({jwt:jwt,email:email,nome:name}).toString()});
+                const j=await r.json().catch(()=>({}));
+                if(!r.ok||!j.ok){
+                  console.error('[Administração] fluxo de criação de login falhou:',r.status,j);
+                  mostrarAviso('Não foi possível criar o login automaticamente',j.erro||j.mensagem||'O serviço de criação de login não respondeu. Tente novamente em instantes ou peça ao time de TI.');
+                  return;
+                }
+                loginCriadoAgora=true;
+                emailBoasVindas=j.emailEnviado!==false;
+                resposta=await chamarRpc();
+                if(resposta&&resposta.error){console.error('[Administração] erro ao vincular perfil:',resposta.error);toast('O login foi criado, mas o perfil não foi vinculado: '+(resposta.error.message||'tente novamente.'));return}
+                linha=Array.isArray(resposta.data)?resposta.data[0]:resposta.data;
+              }catch(errLogin){
+                console.error('[Administração] falha ao chamar o fluxo de criação de login:',errLogin);
+                mostrarAviso('Não foi possível criar o login automaticamente','Não consegui falar com o serviço de criação de login. Verifique a conexão e tente novamente.');
+                return;
+              }
+            }
+            if(!linha||!linha.criado){
+              const msgServidor=(linha&&linha.mensagem)||'';
+              if(!msgServidor||/authentication|login/i.test(msgServidor)){
+                mostrarAviso('Falta criar o login de '+email,'A plataforma só libera o acesso de quem já tem login. Faça assim:',[
+                  'No Supabase, abra Authentication › Users e clique em Add user › Create new user.',
+                  'Digite este mesmo e-mail e uma senha provisória, e marque a opção "Auto Confirm User".',
+                  'Volte aqui e clique em Criar usuário de novo.'
+                ]);
+              }else{
+                mostrarAviso('Não foi possível criar o usuário',msgServidor);
+              }
+              return;
+            }
+            toast(loginCriadoAgora?(emailBoasVindas?'Usuário criado. Enviamos um e-mail com o link e o passo a passo do primeiro acesso.':'Usuário criado, mas o e-mail de boas-vindas não foi enviado. Avise a pessoa para usar "Esqueci minha senha" no primeiro acesso.'):'Usuário criado e vinculado ao login existente.');
           }
           await loadUsers();
           location.hash='';
@@ -3992,10 +4420,24 @@ html>body{padding:0}
         // toast - a remoção de verdade da comunidade é um processo
         // separado (Processamentos individuais), deliberadamente adiado.
         const remove=document.querySelector('input[name="pa-remove-community"]:checked')?.value==='yes';
+        const alvoId=current.id;
         try{
-          const resposta=await supaClient.from('usuarios_plataforma').delete().eq('id',current.id);
+          const resposta=await supaClient.from('usuarios_plataforma').delete().eq('id',alvoId);
           if(resposta&&resposta.error){console.error('[Administração] erro ao excluir usuário:',resposta.error);toast('Não foi possível excluir agora: '+(resposta.error.message||'tente novamente.'));return}
-          toast(remove?'Usuário excluído. Remoção individual registrada em Processamentos.':'Usuário excluído. O login em Authentication não foi apagado.');
+          // Apaga também o login em Authentication (fluxo n8n, ação "excluir").
+          let sufixoLogin=' O login em Authentication não foi apagado.';
+          if(URL_CRIAR_LOGIN){
+            try{
+              const sess=await supaClient.auth.getSession();
+              const jwt=sess&&sess.data&&sess.data.session&&sess.data.session.access_token;
+              if(!jwt)throw new Error('sessão expirada');
+              const r=await fetch(URL_CRIAR_LOGIN,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({acao:'excluir',jwt:jwt,id:alvoId}).toString()});
+              const j=await r.json().catch(()=>({}));
+              if(r.ok&&j.ok){sufixoLogin=' O login também foi apagado.'}
+              else{console.error('[Administração] fluxo de exclusão de login falhou:',r.status,j);sufixoLogin=' Mas o login em Authentication não pôde ser apagado agora: apague pelo Supabase (Authentication › Users).'}
+            }catch(errLogin){console.error('[Administração] falha ao chamar o fluxo de exclusão de login:',errLogin);sufixoLogin=' Mas o login em Authentication não pôde ser apagado agora: apague pelo Supabase (Authentication › Users).'}
+          }
+          toast((remove?'Usuário excluído. Remoção individual registrada em Processamentos.':'Usuário excluído.')+sufixoLogin);
           current=null;window.__paCurrent=null;
           await loadUsers();
           location.hash='';
@@ -4477,7 +4919,7 @@ errorExport.addEventListener('click',e=>{e.preventDefault();const p=meta[current
     if (!supa) return null;
     var resposta = await supa
       .from('usuarios_plataforma')
-      .select('id,nome,email,is_admin,modulos,ativo')
+      .select('id,nome,email,is_admin,modulos,areas,ativo')
       .eq('id', userId)
       .single();
     if (resposta.error) {
@@ -4519,6 +4961,40 @@ errorExport.addEventListener('click',e=>{e.preventDefault();const p=meta[current
   // aplicado na migração) o que o perfil logado pode ver/usar: esconde
   // itens de menu e blocos da Visão Geral fora do conjunto de módulos
   // liberado. Admin sempre vê tudo.
+
+  // Identidade do usuário logado (27/10/2026): saudação, avatar, menu do
+  // perfil e "Meu perfil" eram texto fixo do protótipo ("Ana Silva", "AS").
+  // Agora vêm de usuarios_plataforma.nome (o nome digitado na Administração).
+  function aplicarIdentidade(perfil, user) {
+    try {
+      var email = (perfil && perfil.email) || (user && user.email) || '';
+      var nome = String((perfil && perfil.nome) || '').trim() || email.split('@')[0].replace(/[._-]+/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); }) || '';
+      var partes = nome.split(/\s+/).filter(Boolean);
+      var primeiro = partes[0] || '';
+      var iniciais = ((partes[0] || '').charAt(0) + (partes.length > 1 ? partes[partes.length - 1].charAt(0) : '')).toUpperCase() || '?';
+      var areas = perfil && Array.isArray(perfil.areas) ? perfil.areas.filter(Boolean) : [];
+      var papel = perfil && perfil.is_admin ? 'Administrador' : 'Usuário da plataforma';
+      var detalhe = papel + (areas.length ? ' · ' + areas[0] : '');
+      window.AsserthUsuarioNome = nome;
+      window.AsserthUsuarioPrimeiroNome = primeiro;
+      var tocados = [];
+      document.querySelectorAll('.pv-avatar').forEach(function (el) { el.textContent = iniciais; tocados.push(el); });
+      document.querySelectorAll('.pv-profile-summary strong').forEach(function (el) { el.textContent = nome; tocados.push(el); });
+      document.querySelectorAll('.pv-profile-summary span').forEach(function (el) { el.textContent = detalhe; tocados.push(el); });
+      var campoNome = document.getElementById('pv-name'); if (campoNome) campoNome.value = nome;
+      var campoEmail = document.getElementById('pv-email'); if (campoEmail) campoEmail.value = email;
+      var painel = document.getElementById('pv-native-profile');
+      if (painel) {
+        var ro = painel.querySelectorAll('input[readonly]');
+        if (ro[0]) ro[0].value = areas.length ? areas.join(', ') : '—';
+        if (ro[1]) ro[1].value = papel;
+      }
+      // Não deixa a tradução automática devolver o texto antigo do protótipo.
+      if (window.AsserthI18n && typeof window.AsserthI18n.retagAndRefresh === 'function') window.AsserthI18n.retagAndRefresh(tocados);
+      document.dispatchEvent(new CustomEvent('asserth:perfil'));
+    } catch (e) { console.error('[AsserthAuth] erro ao aplicar identidade:', e); }
+  }
+
   function aplicarRBAC(perfil) {
     limparRBAC();
     if (!platform || !perfil || perfil.is_admin === true) return;
@@ -4571,6 +5047,7 @@ errorExport.addEventListener('click',e=>{e.preventDefault();const p=meta[current
   // de qualquer um dos dois - o fragmento já trata os três casos).
   // -------------------------------------------------------------------
   window.AsserthAuth = {
+    aplicarIdentidade: aplicarIdentidade,
     attemptLogin: async function (email, senha) {
       if (!supa) {
         return { success: false, message: 'Não foi possível conectar ao serviço de autenticação.' };
@@ -4588,6 +5065,7 @@ errorExport.addEventListener('click',e=>{e.preventDefault();const p=meta[current
       }
       window.AsserthSession = { user: entrada.data.user, perfil: perfil };
       aplicarRBAC(perfil);
+      aplicarIdentidade(perfil, entrada.data.user);
       return { success: true };
     },
     logout: async function () {
@@ -4596,6 +5074,53 @@ errorExport.addEventListener('click',e=>{e.preventDefault();const p=meta[current
       }
       window.AsserthSession = null;
       limparRBAC();
+    },
+
+    // ---- Recuperação de senha (código de 6 dígitos por e-mail) ----
+    // Requer no Supabase: template "Reset Password" com {{ .Token }} e SMTP
+    // próprio configurado (ver supabase_recuperacao_de_senha.md).
+    enviarCodigoRecuperacao: async function (email) {
+      if (!supa) return { success: false, message: 'Não foi possível conectar ao serviço de autenticação.' };
+      var r = await supa.auth.resetPasswordForEmail(String(email || '').trim().toLowerCase());
+      if (r && r.error) {
+        console.error('[AsserthAuth] erro ao enviar código:', r.error);
+        var texto = String(r.error.message || '').toLowerCase();
+        if (r.error.status === 429 || /rate limit|security purposes|only request this once/.test(texto)) {
+          return { success: false, message: 'Aguarde cerca de 1 minuto antes de pedir um novo código.' };
+        }
+        return { success: false, message: 'Não foi possível enviar o código agora. Tente novamente em instantes.' };
+      }
+      return { success: true };
+    },
+    validarCodigoRecuperacao: async function (email, codigo) {
+      if (!supa) return { success: false, message: 'Não foi possível conectar ao serviço de autenticação.' };
+      var r = await supa.auth.verifyOtp({ email: String(email || '').trim().toLowerCase(), token: String(codigo || '').trim(), type: 'recovery' });
+      if (r && r.error) {
+        console.error('[AsserthAuth] erro ao validar código:', r.error);
+        return { success: false, message: 'Código inválido ou expirado. Confira o código ou peça um novo.' };
+      }
+      return { success: true };
+    },
+    alterarSenhaRecuperacao: async function (novaSenha) {
+      if (!supa) return { success: false, message: 'Não foi possível conectar ao serviço de autenticação.' };
+      var r = await supa.auth.updateUser({ password: String(novaSenha || '') });
+      if (r && r.error) {
+        console.error('[AsserthAuth] erro ao alterar senha:', r.error);
+        var codigoErro = String(r.error.code || '') + ' ' + String(r.error.message || '').toLowerCase();
+        if (/same_password|different from the old/.test(codigoErro)) return { success: false, message: 'A nova senha precisa ser diferente da senha atual.' };
+        if (/weak_password|weak|characters/.test(codigoErro)) return { success: false, message: 'Senha fraca demais. Use letras, números e um caractere especial.' };
+        if (/session|jwt|expired|not authenticated/.test(codigoErro)) return { success: false, message: 'O código expirou. Volte e peça um novo código.' };
+        return { success: false, message: 'Não foi possível alterar a senha agora. Tente novamente.' };
+      }
+      // Encerra a sessão temporária de recuperação: a pessoa entra de novo com a senha nova.
+      try { await supa.auth.signOut(); } catch (err) { console.error('[AsserthAuth] erro ao encerrar sessão de recuperação:', err); }
+      window.AsserthSession = null;
+      return { success: true };
+    },
+    cancelarRecuperacao: async function () {
+      if (!supa) return;
+      try { await supa.auth.signOut(); } catch (err) { console.error('[AsserthAuth] erro ao cancelar recuperação:', err); }
+      window.AsserthSession = null;
     }
   };
 
@@ -4631,7 +5156,7 @@ errorExport.addEventListener('click',e=>{e.preventDefault();const p=meta[current
     // sendo redesenhados por refreshIcons(), duas linhas abaixo) fazia a
     // tela "pular" de volta pra plataforma sozinha logo após o logout.
     var loginSubmit = loginRoot && loginRoot.querySelector('#al-submit');
-    if (loginSubmit) { loginSubmit.disabled = false; loginSubmit.innerHTML = 'Entrar <i data-lucide="arrow-right" aria-hidden="true"></i>'; }
+    if (loginSubmit) { loginSubmit.disabled = false; delete loginSubmit.dataset.state; loginSubmit.innerHTML = 'Entrar <i data-lucide="arrow-right" aria-hidden="true"></i>'; }
     var loginFeedback = loginRoot && loginRoot.querySelector('#al-feedback');
     if (loginFeedback) { loginFeedback.textContent = ''; loginFeedback.style.color = ''; }
     var loginEmail = loginRoot && loginRoot.querySelector('#al-email');
@@ -4658,6 +5183,13 @@ errorExport.addEventListener('click',e=>{e.preventDefault();const p=meta[current
     // ou inativo), precisamos reexibir o login - senão a pessoa fica presa
     // numa tela em branco.
     var loginSection = document.getElementById('view-login');
+    // Link de primeiro acesso: ignora (e encerra) qualquer sessão antiga deste
+    // navegador e mostra direto a tela de ativação.
+    if (/[?&]primeiro-acesso/.test(location.search)) {
+      try { if (supa) await supa.auth.signOut(); } catch (err) {}
+      if (loginSection) loginSection.hidden = false;
+      return;
+    }
     if (!supa) { if (loginSection) loginSection.hidden = false; return; }
     try {
       var sessaoResposta = await supa.auth.getSession();
@@ -4667,6 +5199,7 @@ errorExport.addEventListener('click',e=>{e.preventDefault();const p=meta[current
       if (!perfil || !perfil.ativo) { if (loginSection) loginSection.hidden = false; return; }
       window.AsserthSession = { user: sessao.user, perfil: perfil };
       aplicarRBAC(perfil);
+      aplicarIdentidade(perfil, sessao.user);
       revealPlatform();
     } catch (err) {
       console.error('[AsserthAuth] falha ao retomar sessão existente:', err);
@@ -4687,7 +5220,7 @@ errorExport.addEventListener('click',e=>{e.preventDefault();const p=meta[current
     if (!submit) return;
     var alreadyTriggered = false;
     var observer = new MutationObserver(function () {
-      if (!alreadyTriggered && !submit.disabled && /Acesso validado/.test(submit.textContent)) {
+      if (!alreadyTriggered && !submit.disabled && (submit.dataset.state === 'ok' || /Acesso validado/.test(submit.textContent))) {
         alreadyTriggered = true;
         setTimeout(revealPlatform, 550); // dá tempo do usuário ler o feedback de sucesso
       }
@@ -5067,7 +5600,7 @@ errorExport.addEventListener('click',e=>{e.preventDefault();const p=meta[current
       var workTitle = sectionHeads[0];
       var agendaTitle = sectionHeads[1];
       var updated = section.querySelector('.pv-statusbar time');
-      if (greeting) greeting.textContent = salutation + ', Ana.';
+      if (greeting) greeting.textContent = salutation + (window.AsserthUsuarioPrimeiroNome ? ', ' + window.AsserthUsuarioPrimeiroNome : '') + '.';
       if (intro) intro.textContent = words.intro;
       if (kicker) kicker.textContent = words.overview;
       if (workTitle) workTitle.textContent = words.work;
@@ -5102,6 +5635,8 @@ errorExport.addEventListener('click',e=>{e.preventDefault();const p=meta[current
         localStorage.setItem('asserth-zone', tz);
       } catch (e) {}
     }
+
+    document.addEventListener('asserth:perfil', function () { try { applyGreetingAndClock(language.value, zone.value); } catch (e) {} });
 
     // ----- conteúdo dinâmico (tabelas/listas re-renderizadas por filtros
     // e ações mock em Membros, Grupos, Administração, Processamentos,
